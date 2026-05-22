@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, File, Form, Query, UploadFile
 
 from app.core.deps import get_llm_service, get_stt_service, get_tts_service
 from app.db.memory import ConversationStore, get_conversation_store
@@ -29,6 +29,23 @@ async def voice_turn(
     session_id = payload.session_id or store.create_session()
     assistant_text = await llm.generate_reply(payload.utterance)
     store.add_turn(session_id, payload.utterance, assistant_text)
+    return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
+
+
+@router.post("/turn/audio", response_model=VoiceTurnResponse)
+async def voice_turn_audio(
+    audio: UploadFile = File(...),
+    session_id: str | None = Form(None),
+    stt: STTService = Depends(get_stt_service),
+    llm: LLMService = Depends(get_llm_service),
+    store: ConversationStore = Depends(get_conversation_store),
+) -> VoiceTurnResponse:
+    audio_bytes = await audio.read()
+    utterance = await stt.transcribe(audio_bytes, filename=audio.filename or "audio.wav")
+
+    session_id = session_id or store.create_session()
+    assistant_text = await llm.generate_reply(utterance)
+    store.add_turn(session_id, utterance, assistant_text)
     return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
 
 
