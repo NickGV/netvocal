@@ -24,4 +24,4 @@
 # === Fase 4: Feature implementation ===
 2026-05-21: [#5] BE-1.4 Conversation history in-memory — #5
 2026-05-21: [#7] BE-1.1 Real STT integration (OpenAI Whisper API) — 3588897
-2026-05-21: [#4] BE-1.2 Real LLM integration (OpenAI Chat Completions) — feaf8ca
+2026-05-21: [#4] BE-1.2 Real LLM integration (OpenAI Chat Completions) — d7c154a
