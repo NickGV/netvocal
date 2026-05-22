@@ -17,3 +17,6 @@
 # === Fase 3: Tests infrastructure ===
 2026-05-21: [#] Backend: added test_voice.py, test_tasks.py, test_meetings.py (9 tests total)
 2026-05-21: [#9] Frontend: vitest configured with @testing-library/react, 4 tests passing for RecordButton
+2026-05-21: [#] Python .venv creado con pip, dependencias instaladas
+2026-05-21: [#] Backend tests: 12 passed (health + voice + tasks + meetings)
+2026-05-21: [#] Frontend tests: 4 passed (RecordButton)
