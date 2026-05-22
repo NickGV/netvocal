@@ -8,3 +8,5 @@ class Settings(BaseSettings):
     openai_api_key: str = ""
     stt_provider: str = "mock"
     whisper_model: str = "whisper-1"
+    llm_provider: str = "mock"
+    llm_model: str = "gpt-4o-mini"

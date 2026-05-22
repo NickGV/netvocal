@@ -27,7 +27,8 @@ async def voice_turn(
     _ = tts
 
     session_id = payload.session_id or store.create_session()
-    assistant_text = await llm.generate_reply(payload.utterance)
+    history = store.get_history(session_id)
+    assistant_text = await llm.generate_reply(payload.utterance, conversation_history=history)
     store.add_turn(session_id, payload.utterance, assistant_text)
     return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
 
@@ -44,7 +45,8 @@ async def voice_turn_audio(
     utterance = await stt.transcribe(audio_bytes, filename=audio.filename or "audio.wav")
 
     session_id = session_id or store.create_session()
-    assistant_text = await llm.generate_reply(utterance)
+    history = store.get_history(session_id)
+    assistant_text = await llm.generate_reply(utterance, conversation_history=history)
     store.add_turn(session_id, utterance, assistant_text)
     return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
 
