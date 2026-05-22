@@ -1,7 +1,13 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from app.core.deps import get_llm_service, get_stt_service, get_tts_service
-from app.schemas.voice import VoiceTurnRequest, VoiceTurnResponse
+from app.db.memory import ConversationStore, get_conversation_store
+from app.schemas.voice import (
+    HistoryEntry,
+    HistoryResponse,
+    VoiceTurnRequest,
+    VoiceTurnResponse,
+)
 from app.services.llm.base import LLMService
 from app.services.stt.base import STTService
 from app.services.tts.base import TTSService
@@ -15,15 +21,24 @@ async def voice_turn(
     stt: STTService = Depends(get_stt_service),
     llm: LLMService = Depends(get_llm_service),
     tts: TTSService = Depends(get_tts_service),
+    store: ConversationStore = Depends(get_conversation_store),
 ) -> VoiceTurnResponse:
-    """Mocked pipeline endpoint.
+    _ = stt
+    _ = tts
 
-    For now we accept a text "utterance" and return a mocked assistant response.
-    Audio transport/streaming will be introduced later.
-    """
-
-    _ = stt  # reserved for future audio-based transcribe()
-    _ = tts  # reserved for future synthesize()
-
+    session_id = payload.session_id or store.create_session()
     assistant_text = await llm.generate_reply(payload.utterance)
-    return VoiceTurnResponse(assistant_text=assistant_text)
+    store.add_turn(session_id, payload.utterance, assistant_text)
+    return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
+
+
+@router.get("/history", response_model=HistoryResponse)
+async def voice_history(
+    session_id: str = Query(..., min_length=1),
+    store: ConversationStore = Depends(get_conversation_store),
+) -> HistoryResponse:
+    turns = store.get_history(session_id)
+    return HistoryResponse(
+        session_id=session_id,
+        turns=[HistoryEntry(**t) for t in turns],
+    )
