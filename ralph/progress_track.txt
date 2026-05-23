@@ -1,2 +1,3 @@
 2026-05-22: [#6] CRUD de tareas implementado — 73e1832
 2026-05-22: [#11] CRUD de reuniones implementado — fa0d1e1
+2026-05-22: [#12] Parser de intenciones vía LLM implementado — 8c557b8
