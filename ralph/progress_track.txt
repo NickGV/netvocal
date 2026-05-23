@@ -1,0 +1,5 @@
+# Progress: Track D — Frontend UI + Infraestructura
+# Developer: D | Branch: feat/frontend-ui
+# Formato: YYYY-MM-DD: [#ID] Descripción — <commit-hash>
+2026-05-23: [#6.1] Configurar variables de entorno completas (.env.example con backend + frontend vars)
+2026-05-23: [#6.2] Agregar tests de frontend (vitest) — ConversationHistory + useRecorderUI
