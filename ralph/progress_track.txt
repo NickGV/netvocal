@@ -1,3 +1,10 @@
+# Progress: Track D — Frontend UI + Infraestructura
+# Developer: D | Branch: feat/frontend-ui
+# Formato: YYYY-MM-DD: [#ID] Descripción — <commit-hash>
+2026-05-23: [#6.1] Configurar variables de entorno completas (.env.example con backend + frontend vars)
+2026-05-23: [#6.2] Agregar tests de frontend (vitest) — ConversationHistory + useRecorderUI
+2026-05-23: [#6.3] Documentar happy path completo en README
+2026-05-23: [#6.4] Docker Compose para dev — Dockerfile.api, Dockerfile.web, docker-compose.yml
 2026-05-22: [#6] CRUD de tareas implementado — 73e1832
 2026-05-22: [#11] CRUD de reuniones implementado — fa0d1e1
 2026-05-22: [#12] Parser de intenciones vía LLM implementado — 8c557b8
