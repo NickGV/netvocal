@@ -4,5 +4,5 @@ export type ConversationItem = {
   id: string
   role: ConversationRole
   text: string
-  ts: number
+  timestamp: string // ISO 8601 string
 }

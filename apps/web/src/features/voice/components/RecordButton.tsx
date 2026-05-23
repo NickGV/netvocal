@@ -1,13 +1,14 @@
 type Props = {
   isRecording: boolean
-  onToggle: () => void
+  onStart: () => void
+  onStop: () => void
 }
 
-export function RecordButton({ isRecording, onToggle }: Props) {
+export function RecordButton({ isRecording, onStart, onStop }: Props) {
   return (
     <button
       type="button"
-      onClick={onToggle}
+      onClick={isRecording ? onStop : onStart}
       className={
         "rounded-lg px-4 py-2 text-sm font-medium transition " +
         (isRecording
@@ -16,7 +17,7 @@ export function RecordButton({ isRecording, onToggle }: Props) {
       }
       aria-pressed={isRecording}
     >
-      {isRecording ? "Stop recording" : "Start recording"}
+      {isRecording ? "Detener grabación" : "Iniciar grabación"}
     </button>
   )
 }

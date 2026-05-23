@@ -1,0 +1,34 @@
+NETVOCAL PROGRESS TRACK
+========================
+Branch: developKevin
+Date: 2026-05-22
+
+Sprint: Frontend-Backend Integration
+
+DONE
+----
+- Fix timestamp schema (ISO string instead of UNIX epoch)
+- [FE] #4.1: Connect text input to real POST /voice/turn endpoint
+- [FE] #4.2: Real audio capture via MediaRecorder API (permissions, start/stop, blobs)
+- [FE] #4.3: Fetch real conversation history from GET /voice/history on mount
+- [BE]  4.3: Created GET /voice/history endpoint with in-memory persistence
+- [FE] #4.4: Toast notification system for errors replaced alert()
+
+FILES CREATED
+-------------
+- apps/web/src/features/voice/components/Toast.tsx
+
+FILES MODIFIED
+--------------
+- apps/api/app/schemas/voice.py          (+ConversationItem model)
+- apps/api/app/api/routes/voice.py       (+GET /history, memory store)
+- apps/web/src/features/voice/types.ts   (timestamp schema fix)
+- apps/web/src/features/voice/hooks/useRecorderUI.ts (major: MediaRecorder, toasts, history fetch)
+- apps/web/src/features/voice/components/RecordButton.tsx (onStart/onStop API)
+- apps/web/src/app/page.tsx              (toast container integration)
+
+NEXT
+----
+- Send real audio blob via FormData when backend supports /voice/audio
+- TTS response playback
+- E2E tests
