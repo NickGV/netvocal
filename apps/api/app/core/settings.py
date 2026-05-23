@@ -10,3 +10,6 @@ class Settings(BaseSettings):
     whisper_model: str = "whisper-1"
     llm_provider: str = "mock"
     llm_model: str = "gpt-4o-mini"
+    tts_provider: str = "mock"
+    tts_model: str = "tts-1"
+    tts_voice: str = "alloy"
