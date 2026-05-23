@@ -11,6 +11,7 @@ app/core/__init__.py
 app/core/deps.py
 app/core/settings.py
 app/db/__init__.py
+app/db/memory.py
 app/models/__init__.py
 app/schemas/__init__.py
 app/schemas/meetings.py
@@ -20,13 +21,19 @@ app/services/__init__.py
 app/services/llm/__init__.py
 app/services/llm/base.py
 app/services/llm/mock.py
+app/services/llm/openai.py
 app/services/stt/__init__.py
 app/services/stt/base.py
 app/services/stt/mock.py
+app/services/stt/openai.py
 app/services/tts/__init__.py
 app/services/tts/base.py
 app/services/tts/mock.py
+app/services/tts/openai.py
 tests/test_health.py
+tests/test_meetings.py
+tests/test_tasks.py
+tests/test_voice.py
 voice_assistant_api.egg-info/PKG-INFO
 voice_assistant_api.egg-info/SOURCES.txt
 voice_assistant_api.egg-info/dependency_links.txt

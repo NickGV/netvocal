@@ -7,6 +7,7 @@ from app.services.stt.mock import MockSTTService
 from app.services.stt.openai import OpenAIWhisperSTTService
 from app.services.tts.base import TTSService
 from app.services.tts.mock import MockTTSService
+from app.services.tts.openai import OpenAITTSService
 
 
 def get_stt_service() -> STTService:
@@ -30,4 +31,11 @@ def get_llm_service() -> LLMService:
 
 
 def get_tts_service() -> TTSService:
+    settings = Settings()
+    if settings.tts_provider == "openai":
+        return OpenAITTSService(
+            api_key=settings.openai_api_key,
+            model=settings.tts_model,
+            voice=settings.tts_voice,
+        )
     return MockTTSService()
