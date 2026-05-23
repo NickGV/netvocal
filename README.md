@@ -2,68 +2,57 @@
 
 Production-ready monorepo scaffold for a real-time developer voice assistant.
 
-Planned pipeline: **Microphone → Speech-to-Text → LLM → Text-to-Speech → Speaker**.
-
-This repository focuses on **structure, clarity, and scalability**. Core STT/LLM/TTS integrations are **mocked** for now.
-
-## Monorepo structure
-
-```
-apps/
-  web/         # Next.js frontend (App Router)
-  api/         # FastAPI backend (Python 3.11+)
-packages/      # Shared code (reserved for future)
-infra/         # Infrastructure (reserved for future)
-docs/
-```
+Pipeline: **Microphone → Speech-to-Text → LLM → Text-to-Speech → Speaker**.
 
 ## Tech stack
 
-- Frontend: Next.js (App Router), TypeScript, Tailwind CSS
-- Backend: FastAPI, asyncio, uvicorn
-- Tooling: pnpm workspaces
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind CSS
+- **Backend:** FastAPI, asyncio, uvicorn, pydantic-settings
+- **Tooling:** pnpm workspaces, Python 3.11+
 
 ## Prerequisites
 
-- Node.js 20+ and pnpm
+- Node.js 20+ and pnpm 9+
 - Python 3.11+
 
 ## Environment variables
 
-Copy the example env file at the repo root:
+Copy the example env files:
 
 ```bash
 cp .env.example .env
-```
-
-The web app uses `NEXT_PUBLIC_API_URL`.
-
-Also copy the web env example:
-
-```bash
 cp apps/web/.env.example apps/web/.env.local
 ```
 
-## Run the frontend
+### Backend (`VA_` prefix)
 
-```bash
-pnpm dev:web
-```
+| Var | Default | Description |
+|-----|---------|-------------|
+| `VA_OPENAI_API_KEY` | `""` | OpenAI API key (required for STT/LLM providers) |
+| `VA_STT_PROVIDER` | `mock` | Speech-to-Text provider: `mock` or `openai` |
+| `VA_WHISPER_MODEL` | `whisper-1` | Whisper model name (used with `openai` provider) |
+| `VA_LLM_PROVIDER` | `mock` | LLM provider: `mock` or `openai` |
+| `VA_LLM_MODEL` | `gpt-4o-mini` | LLM model name (used with `openai` provider) |
+| `VA_CORS_ALLOW_ORIGINS` | `["http://localhost:3000"]` | Allowed CORS origins (JSON array) |
 
-Web runs at http://localhost:3000
+### Frontend (`NEXT_PUBLIC_` prefix)
 
-## Run the backend
+| Var | Default | Description |
+|-----|---------|-------------|
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Backend API base URL |
 
-Install Python deps (from `apps/api`):
+## Happy path (dev workflow)
+
+### 1. Start the backend
 
 ```bash
 cd apps/api
 python -m venv .venv
 source .venv/bin/activate
-pip install -e .
+pip install -e ".[dev]"
 ```
 
-Run API (from repo root):
+From repo root, start the API:
 
 ```bash
 pnpm dev:api
@@ -71,8 +60,49 @@ pnpm dev:api
 
 API runs at http://localhost:8000
 
-### Health check
+### 2. Verify the backend
 
 ```bash
 curl http://localhost:8000/health
+# {"status":"ok"}
+```
+
+### 3. Start the frontend
+
+```bash
+pnpm dev:web
+```
+
+Web runs at http://localhost:3000
+
+### 4. Open the dashboard
+
+Navigate to http://localhost:3000 — you'll see the voice assistant UI with a mock conversation.
+
+## Running tests
+
+### Frontend (vitest)
+
+```bash
+pnpm -C apps/web test
+```
+
+Covers: RecordButton, ConversationHistory, useRecorderUI hook.
+
+### Backend (pytest)
+
+```bash
+cd apps/api && source .venv/bin/activate && pytest -v
+```
+
+21 tests covering: health, voice turns (text + audio), tasks CRUD, meetings CRUD.
+
+## Monorepo structure
+
+```
+apps/
+  web/         # Next.js frontend (App Router)
+  api/         # FastAPI backend (Python 3.11+)
+packages/      # Shared code (reserved)
+docs/
 ```
