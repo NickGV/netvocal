@@ -1,65 +1,73 @@
-"""Tests for the /meetings endpoints."""
-
+import pytest
 from fastapi.testclient import TestClient
+from fastapi import FastAPI
+from apps.api.routers import meetings as meetings_router
 
-from app.main import create_app
+def create_app():
+    app = FastAPI()
+    app.include_router(meetings_router.router)
+    return app
 
+app = create_app()
+client = TestClient(app)
 
-def test_list_meetings_returns_list() -> None:
-    """GET /meetings should return a list (empty for now)."""
-    app = create_app()
-    client = TestClient(app)
-
-    res = client.get("/meetings/")
-
-    assert res.status_code == 200
-    assert res.json() == []
-
-
-def test_create_meeting_returns_meeting() -> None:
-    """POST /meetings should return a meeting-like object."""
-    app = create_app()
-    client = TestClient(app)
-
-    res = client.post(
-        "/meetings/",
-        json={
-            "title": "Sprint review",
-            "starts_at": "2026-05-22T10:00:00",
-            "ends_at": "2026-05-22T11:00:00",
-        },
-    )
-
-    assert res.status_code == 200
-    data = res.json()
-    assert data["title"] == "Sprint review"
+def test_create_meeting():
+    import datetime
+    now = datetime.datetime.now() + datetime.timedelta(hours=1)
+    resp = client.post("/meetings/", json={
+        "topic": "Standup",
+        "participants": ["elber", "ana"],
+        "scheduled_for": now.isoformat(),
+        "description": "Standup diario"
+    })
+    assert resp.status_code == 201
+    data = resp.json()
     assert "id" in data
-    assert "starts_at" in data
-    assert "ends_at" in data
+    assert data["topic"] == "Standup"
+    assert len(data["participants"]) == 2
 
+def test_create_meeting_with_no_participants():
+    import datetime
+    now = datetime.datetime.now() + datetime.timedelta(hours=1)
+    resp = client.post("/meetings/", json={
+        "topic": "1:1",
+        "scheduled_for": now.isoformat(),
+        "participants": []
+    })
+    assert resp.status_code == 422
 
-def test_create_meeting_rejects_empty_title() -> None:
-    """Empty title should return 422."""
-    app = create_app()
-    client = TestClient(app)
+def test_create_meeting_past_date():
+    import datetime
+    past = datetime.datetime.now() - datetime.timedelta(days=1)
+    resp = client.post("/meetings/", json={
+        "topic": "Vieja",
+        "participants": ["a"],
+        "scheduled_for": past.isoformat()
+    })
+    assert resp.status_code in (400, 422)
 
-    res = client.post(
-        "/meetings/",
-        json={
-            "title": "",
-            "starts_at": "2026-05-22T10:00:00",
-            "ends_at": "2026-05-22T11:00:00",
-        },
-    )
+def test_get_meetings():
+    import datetime
+    now = datetime.datetime.now() + datetime.timedelta(hours=2)
+    client.post("/meetings/", json={
+        "topic": "Revisión",
+        "participants": ["oscar"],
+        "scheduled_for": now.isoformat()
+    })
+    resp = client.get("/meetings/")
+    assert resp.status_code == 200
+    assert isinstance(resp.json(), list)
 
-    assert res.status_code == 422
-
-
-def test_create_meeting_rejects_missing_dates() -> None:
-    """Missing required date fields should return 422."""
-    app = create_app()
-    client = TestClient(app)
-
-    res = client.post("/meetings/", json={"title": "Standup"})
-
-    assert res.status_code == 422
+def test_delete_meeting():
+    import datetime
+    now = datetime.datetime.now() + datetime.timedelta(hours=5)
+    r = client.post("/meetings/", json={
+        "topic": "Para eliminar",
+        "participants": ["borra"],
+        "scheduled_for": now.isoformat()
+    })
+    meeting_id = r.json()["id"]
+    resp = client.delete(f"/meetings/{meeting_id}")
+    assert resp.status_code == 204
+    resp2 = client.delete(f"/meetings/{meeting_id}")
+    assert resp2.status_code == 404
