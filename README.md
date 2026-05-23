@@ -79,6 +79,14 @@ Web runs at http://localhost:3000
 
 Navigate to http://localhost:3000 — you'll see the voice assistant UI with a mock conversation.
 
+### Alternative: Docker Compose
+
+```bash
+docker compose up --build
+```
+
+This starts both services (api on :8000, web on :3000) without setting up Python venv or Node locally.
+
 ## Running tests
 
 ### Frontend (vitest)
