@@ -1,3 +1,5 @@
+import type { VoiceTurnResponse } from "@/features/voice/types"
+
 type RequestOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
   body?: unknown
@@ -30,6 +32,16 @@ export class ApiClient {
     }
 
     return (await res.json()) as T
+  }
+
+  async postVoiceTurn(
+    utterance: string,
+    sessionId?: string,
+  ): Promise<VoiceTurnResponse> {
+    return this.request<VoiceTurnResponse>("/voice/turn", {
+      method: "POST",
+      body: { utterance, session_id: sessionId },
+    })
   }
 }
 

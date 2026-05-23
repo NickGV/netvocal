@@ -6,3 +6,8 @@ export type ConversationItem = {
   text: string
   ts: number
 }
+
+export type VoiceTurnResponse = {
+  assistant_text: string
+  session_id: string
+}

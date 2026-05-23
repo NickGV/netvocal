@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import type { ConversationItem } from "@/features/voice/types"
 import { uid } from "@/lib/uid"
+import { getApiClient } from "@/services/apiClient"
 
 export function useRecorderUI() {
   const [isRecording, setIsRecording] = useState(false)
@@ -8,40 +9,64 @@ export function useRecorderUI() {
     {
       id: uid(),
       role: "assistant",
-      text: "Hi — I'm ready when you are. (Mocked UI)",
+      text: "Hi — I'm ready when you are.",
       ts: Date.now(),
     },
   ])
+
+  const sessionIdRef = useRef<string | undefined>(undefined)
 
   const start = useCallback(() => setIsRecording(true), [])
   const stop = useCallback(() => setIsRecording(false), [])
 
   const clear = useCallback(() => {
     setHistory([])
+    sessionIdRef.current = undefined
     setIsRecording(false)
   }, [])
 
-  const addMockTurn = useCallback(() => {
-    setHistory((prev) => {
-      const now = Date.now()
-      const user: ConversationItem = {
-        id: uid(),
-        role: "user",
-        text: "Create a reminder for tomorrow at 9am.",
-        ts: now,
-      }
-      const assistant: ConversationItem = {
+  const sendTurn = useCallback(async (text: string) => {
+    if (!text.trim()) return
+
+    const userItem: ConversationItem = {
+      id: uid(),
+      role: "user",
+      text: text.trim(),
+      ts: Date.now(),
+    }
+    setHistory((prev) => [...prev, userItem])
+
+    try {
+      const client = getApiClient()
+      const response = await client.postVoiceTurn(
+        text.trim(),
+        sessionIdRef.current,
+      )
+      sessionIdRef.current = response.session_id
+
+      const assistantItem: ConversationItem = {
         id: uid(),
         role: "assistant",
-        text: "Got it. (Mocked response — API wiring later)",
-        ts: now + 1,
+        text: response.assistant_text,
+        ts: Date.now(),
       }
-      return [...prev, user, assistant]
-    })
+      setHistory((prev) => [...prev, assistantItem])
+    } catch (err) {
+      const errorItem: ConversationItem = {
+        id: uid(),
+        role: "system",
+        text:
+          err instanceof Error
+            ? err.message
+            : "An error occurred while processing your request.",
+        ts: Date.now(),
+      }
+      setHistory((prev) => [...prev, errorItem])
+    }
   }, [])
 
   return useMemo(
-    () => ({ isRecording, history, start, stop, clear, addMockTurn }),
-    [isRecording, history, start, stop, clear, addMockTurn],
+    () => ({ isRecording, history, start, stop, clear, sendTurn }),
+    [isRecording, history, start, stop, clear, sendTurn],
   )
 }
