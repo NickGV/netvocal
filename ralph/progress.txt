@@ -1,0 +1,32 @@
+# Progress: DevVoice Assistant
+# Formato: YYYY-MM-DD: [#ID] Descripción — <commit-hash>
+# ID = número de issue de GitHub o referencia de PRD.md
+
+# === Fase 1: Ralph directory ===
+2026-05-21: [#] Created ralph/ directory with once.sh, afk.sh, PRD.md, progress.txt, sync-issues.sh
+
+# === Fase 2: Issues refinement ===
+2026-05-21: [#] Closed old issues #1, #2, #3 (replaced by vertical slices)
+2026-05-21: [#4] Created: [BE] LLM real integration — independent
+2026-05-21: [#5] Created: [BE] Conversation history in-memory — independent
+2026-05-21: [#6] Created: [BE] Tasks CRUD in-memory — independent
+2026-05-21: [#7] Created: [BE] STT real integration — independent
+2026-05-21: [#8] Created: [INFRA] Env vars configuration — independent
+2026-05-21: [#9] Created: [INFRA] Frontend vitest setup — independent
+
+# === Fase 3: Tests infrastructure ===
+2026-05-21: [#] Backend: added test_voice.py, test_tasks.py, test_meetings.py (9 tests total)
+2026-05-21: [#9] Frontend: vitest configured with @testing-library/react, 4 tests passing for RecordButton
+2026-05-21: [#] Python .venv creado con pip, dependencias instaladas
+2026-05-21: [#] Backend tests: 12 passed (health + voice + tasks + meetings)
+2026-05-21: [#] Frontend tests: 4 passed (RecordButton)
+
+# === Fase 4: Feature implementation ===
+2026-05-21: [#5] BE-1.4 Conversation history in-memory — #5
+2026-05-21: [#7] BE-1.1 Real STT integration (OpenAI Whisper API) — 3588897
+2026-05-21: [#4] BE-1.2 Real LLM integration (OpenAI Chat Completions) — d7c154a
+2026-05-23: [#10] BE-1.3 Real TTS integration (OpenAI TTS API) — 944c712
+2026-05-23: [#11] BE-1.5 Migrate conversation history to SQLite — d4448c0
+2026-05-23: [#12] BE-3.1 Unit tests for STT, LLM, TTS services — 61fbe69
+2026-05-23: [#13] BE-3.2 Integration tests for voice pipeline — 64db641
+2026-05-23: [#14] BE-3.3 Error handling and robustness tests — 80a7564
