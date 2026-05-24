@@ -13,3 +13,4 @@
 2026-05-23: [#4.3] Consumir historial real desde GET /voice/history — a7d4427
 2026-05-23: [#4.4] Manejar y mostrar errores del backend en UI — ce5cff1
 2026-05-23: [#5.1] UI para listar y crear tareas desde el dashboard — ffaba25
+2026-05-23: [#5.2] UI para listar y crear reuniones desde el dashboard — 8191e16
