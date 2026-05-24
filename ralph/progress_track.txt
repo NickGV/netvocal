@@ -1,0 +1,16 @@
+# Progress: Track D — Frontend UI + Infraestructura
+# Developer: D | Branch: feat/frontend-ui
+# Formato: YYYY-MM-DD: [#ID] Descripción — <commit-hash>
+2026-05-23: [#6.1] Configurar variables de entorno completas (.env.example con backend + frontend vars)
+2026-05-23: [#6.2] Agregar tests de frontend (vitest) — ConversationHistory + useRecorderUI
+2026-05-23: [#6.3] Documentar happy path completo en README
+2026-05-23: [#6.4] Docker Compose para dev — Dockerfile.api, Dockerfile.web, docker-compose.yml
+2026-05-22: [#6] CRUD de tareas implementado — 73e1832
+2026-05-22: [#11] CRUD de reuniones implementado — fa0d1e1
+2026-05-22: [#12] Parser de intenciones vía LLM implementado — 8c557b8
+2026-05-23: [#4.1] Conectar botón de grabación al endpoint real /voice/turn (texto)
+2026-05-23: [#4.2] Capturar audio real del micrófono (MediaRecorder API) — 213ad14
+2026-05-23: [#4.3] Consumir historial real desde GET /voice/history — a7d4427
+2026-05-23: [#4.4] Manejar y mostrar errores del backend en UI — ce5cff1
+2026-05-23: [#5.1] UI para listar y crear tareas desde el dashboard — ffaba25
+2026-05-23: [#5.2] UI para listar y crear reuniones desde el dashboard — 8191e16
