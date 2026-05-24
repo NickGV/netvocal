@@ -181,6 +181,16 @@ export function useRecorderUI() {
     }
   }, [])
 
+  const addSystemMessage = useCallback((text: string) => {
+    const item: ConversationItem = {
+      id: uid(),
+      role: "system",
+      text,
+      ts: Date.now(),
+    }
+    setHistory((prev) => [...prev, item])
+  }, [])
+
   return useMemo(
     () => ({
       isRecording,
@@ -191,9 +201,10 @@ export function useRecorderUI() {
       clear,
       dismissError,
       dismissHistoryItem,
+      addSystemMessage,
       sendTurn,
       sendTurnAudio,
     }),
-    [isRecording, history, lastError, start, stop, clear, dismissError, dismissHistoryItem, sendTurn, sendTurnAudio],
+    [isRecording, history, lastError, start, stop, clear, dismissError, dismissHistoryItem, addSystemMessage, sendTurn, sendTurnAudio],
   )
 }

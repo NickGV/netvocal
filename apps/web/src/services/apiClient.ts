@@ -194,6 +194,13 @@ export class ApiClient {
       body: data,
     })
   }
+
+  async parseIntent(query: string): Promise<{ intent: string; message: string | null }> {
+    return this.request("/intent/parse", {
+      method: "POST",
+      body: { query },
+    })
+  }
 }
 
 export function getApiClient() {

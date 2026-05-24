@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef } from "react"
 import { ConversationHistory } from "@/features/voice/components/ConversationHistory"
+import { QuickCommand } from "@/features/voice/components/QuickCommand"
 import { RecordButton } from "@/features/voice/components/RecordButton"
 import { MeetingForm } from "@/features/meetings/components/MeetingForm"
 import { MeetingList } from "@/features/meetings/components/MeetingList"
@@ -24,6 +25,7 @@ export default function DashboardPage() {
     clear,
     dismissError,
     dismissHistoryItem,
+    addSystemMessage,
     sendTurnAudio,
   } = useRecorderUI()
   const recorder = useRecorder()
@@ -71,6 +73,23 @@ export default function DashboardPage() {
     },
     [meetings],
   )
+
+  const handleIntentResult = useCallback(
+    (message: string) => {
+      addSystemMessage(message)
+      tasks.refresh()
+      meetings.refresh()
+    },
+    [addSystemMessage, tasks, meetings],
+  )
+
+  const handleQuickTaskCreated = useCallback(() => {
+    tasks.refresh()
+  }, [tasks])
+
+  const handleQuickMeetingCreated = useCallback(() => {
+    meetings.refresh()
+  }, [meetings])
 
   const statusText = !recorder.isSupported
     ? "Mic not supported"
@@ -134,6 +153,26 @@ export default function DashboardPage() {
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
         <h2 className="mb-3 text-lg font-medium">Conversation</h2>
         <ConversationHistory items={history} onDismiss={dismissHistoryItem} />
+      </section>
+
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
+        <h2 className="mb-3 text-lg font-medium">Voice Commands</h2>
+        <p className="mb-3 text-sm text-zinc-500">
+          Type a command like{" "}
+          <span className="text-zinc-300">
+            &quot;crea una tarea comprar leche&quot;
+          </span>{" "}
+          or{" "}
+          <span className="text-zinc-300">
+            &quot;lista mis tareas&quot;
+          </span>
+          .
+        </p>
+        <QuickCommand
+          onResult={handleIntentResult}
+          onTaskCreated={handleQuickTaskCreated}
+          onMeetingCreated={handleQuickMeetingCreated}
+        />
       </section>
 
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">

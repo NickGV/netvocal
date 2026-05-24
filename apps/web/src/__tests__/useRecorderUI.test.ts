@@ -249,4 +249,17 @@ describe("useRecorderUI", () => {
     expect(result.current.history.at(-1)?.text).toContain("Audio API error")
     expect(result.current.lastError?.message).toContain("Audio API error")
   })
+
+  it("addSystemMessage adds a system message to history", () => {
+    const { result } = renderHook(() => useRecorderUI())
+    const initialLen = result.current.history.length
+
+    act(() => {
+      result.current.addSystemMessage("Test system message")
+    })
+
+    expect(result.current.history).toHaveLength(initialLen + 1)
+    expect(result.current.history.at(-1)?.role).toBe("system")
+    expect(result.current.history.at(-1)?.text).toBe("Test system message")
+  })
 })

@@ -121,4 +121,23 @@ describe("ApiClient", () => {
       expect((opts.body as FormData).get("audio")).toBeInstanceOf(Blob)
     })
   })
+
+  describe("parseIntent", () => {
+    it("calls /intent/parse with query and returns intent", async () => {
+      const expected = { intent: "create_task", message: "Tarea creada: test" }
+      vi.mocked(fetch).mockImplementation(
+        mockFetch(200, expected) as unknown as typeof fetch,
+      )
+
+      const client = new ApiClient("http://localhost:8000")
+      const result = await client.parseIntent("crea una tarea test")
+
+      expect(result).toEqual(expected)
+
+      const fetchCall = vi.mocked(fetch).mock.calls[0]
+      const [url, opts] = fetchCall as [string | URL, RequestInit]
+      expect(url.toString()).toContain("/intent/parse")
+      expect(opts.method).toBe("POST")
+    })
+  })
 })
