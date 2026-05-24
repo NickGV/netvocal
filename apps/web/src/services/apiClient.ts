@@ -43,6 +43,29 @@ export class ApiClient {
       body: { utterance, session_id: sessionId },
     })
   }
+
+  async postVoiceTurnAudio(
+    audioBlob: Blob,
+    sessionId?: string,
+  ): Promise<VoiceTurnResponse> {
+    const url = new URL("/voice/turn/audio", this.baseUrl)
+    const formData = new FormData()
+    formData.append("audio", audioBlob, "audio.webm")
+    if (sessionId) formData.append("session_id", sessionId)
+
+    const res = await fetch(url.toString(), {
+      method: "POST",
+      headers: { accept: "application/json" },
+      body: formData,
+    })
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "")
+      throw new Error(`API ${res.status} ${res.statusText}: ${text}`)
+    }
+
+    return (await res.json()) as VoiceTurnResponse
+  }
 }
 
 export function getApiClient() {

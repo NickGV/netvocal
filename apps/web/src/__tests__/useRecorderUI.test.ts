@@ -100,4 +100,59 @@ describe("useRecorderUI", () => {
 
     expect(result.current.history).toHaveLength(initialLen)
   })
+
+  it("sendTurnAudio() adds user audio turn then assistant response on success", async () => {
+    const mockPostVoiceTurnAudio = vi.fn().mockResolvedValue({
+      assistant_text: "Audio response",
+      session_id: "session-audio",
+    })
+    ;(getApiClient as ReturnType<typeof vi.fn>).mockReturnValue({
+      postVoiceTurnAudio: mockPostVoiceTurnAudio,
+    })
+
+    const { result } = renderHook(() => useRecorderUI())
+    const initialLen = result.current.history.length
+    const audioBlob = new Blob(["fake audio data"], { type: "audio/webm" })
+
+    act(() => {
+      result.current.sendTurnAudio(audioBlob)
+    })
+
+    expect(result.current.history).toHaveLength(initialLen + 1)
+    expect(result.current.history.at(-1)?.role).toBe("user")
+    expect(result.current.history.at(-1)?.text).toBe("[Audio message]")
+
+    await waitFor(() => {
+      expect(result.current.history).toHaveLength(initialLen + 2)
+    })
+    expect(result.current.history.at(-1)?.role).toBe("assistant")
+    expect(result.current.history.at(-1)?.text).toBe("Audio response")
+    expect(mockPostVoiceTurnAudio).toHaveBeenCalledWith(
+      audioBlob,
+      undefined,
+    )
+  })
+
+  it("sendTurnAudio() shows error on API failure", async () => {
+    const mockPostVoiceTurnAudio = vi
+      .fn()
+      .mockRejectedValue(new Error("Audio API error"))
+    ;(getApiClient as ReturnType<typeof vi.fn>).mockReturnValue({
+      postVoiceTurnAudio: mockPostVoiceTurnAudio,
+    })
+
+    const { result } = renderHook(() => useRecorderUI())
+    const initialLen = result.current.history.length
+    const audioBlob = new Blob(["bad data"], { type: "audio/webm" })
+
+    act(() => {
+      result.current.sendTurnAudio(audioBlob)
+    })
+
+    await waitFor(() => {
+      expect(result.current.history).toHaveLength(initialLen + 2)
+    })
+    expect(result.current.history.at(-1)?.role).toBe("system")
+    expect(result.current.history.at(-1)?.text).toContain("Audio API error")
+  })
 })

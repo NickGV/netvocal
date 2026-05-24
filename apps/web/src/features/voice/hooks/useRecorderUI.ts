@@ -65,8 +65,46 @@ export function useRecorderUI() {
     }
   }, [])
 
+  const sendTurnAudio = useCallback(async (audioBlob: Blob) => {
+    const userItem: ConversationItem = {
+      id: uid(),
+      role: "user",
+      text: "[Audio message]",
+      ts: Date.now(),
+    }
+    setHistory((prev) => [...prev, userItem])
+
+    try {
+      const client = getApiClient()
+      const response = await client.postVoiceTurnAudio(
+        audioBlob,
+        sessionIdRef.current,
+      )
+      sessionIdRef.current = response.session_id
+
+      const assistantItem: ConversationItem = {
+        id: uid(),
+        role: "assistant",
+        text: response.assistant_text,
+        ts: Date.now(),
+      }
+      setHistory((prev) => [...prev, assistantItem])
+    } catch (err) {
+      const errorItem: ConversationItem = {
+        id: uid(),
+        role: "system",
+        text:
+          err instanceof Error
+            ? err.message
+            : "An error occurred while processing your audio.",
+        ts: Date.now(),
+      }
+      setHistory((prev) => [...prev, errorItem])
+    }
+  }, [])
+
   return useMemo(
-    () => ({ isRecording, history, start, stop, clear, sendTurn }),
-    [isRecording, history, start, stop, clear, sendTurn],
+    () => ({ isRecording, history, start, stop, clear, sendTurn, sendTurnAudio }),
+    [isRecording, history, start, stop, clear, sendTurn, sendTurnAudio],
   )
 }

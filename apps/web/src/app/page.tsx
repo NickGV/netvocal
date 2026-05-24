@@ -1,44 +1,48 @@
 "use client"
 
-import { useCallback, useState } from "react"
+import { useCallback, useEffect } from "react"
 import { ConversationHistory } from "@/features/voice/components/ConversationHistory"
 import { RecordButton } from "@/features/voice/components/RecordButton"
+import { useRecorder } from "@/features/voice/hooks/useRecorder"
 import { useRecorderUI } from "@/features/voice/hooks/useRecorderUI"
 
 export default function DashboardPage() {
-  const { isRecording, history, start, stop, clear, sendTurn } =
+  const { isRecording, history, start, stop, clear, sendTurnAudio } =
     useRecorderUI()
-  const [inputText, setInputText] = useState("")
+  const recorder = useRecorder()
+
+  useEffect(() => {
+    if (recorder.audioBlob) {
+      sendTurnAudio(recorder.audioBlob)
+      recorder.reset()
+    }
+  }, [recorder.audioBlob, sendTurnAudio, recorder])
 
   const handleToggle = useCallback(() => {
     if (isRecording) {
-      if (inputText.trim()) {
-        sendTurn(inputText.trim())
-        setInputText("")
-      }
       stop()
+      recorder.stopRecording()
     } else {
       start()
+      recorder.startRecording()
     }
-  }, [isRecording, inputText, sendTurn, start, stop])
+  }, [isRecording, start, stop, recorder])
 
-  const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (e.key === "Enter" && inputText.trim()) {
-        sendTurn(inputText.trim())
-        setInputText("")
-        stop()
-      }
-    },
-    [inputText, sendTurn, stop],
-  )
+  const statusText = !recorder.isSupported
+    ? "Mic not supported"
+    : recorder.error
+      ? recorder.error
+      : isRecording
+        ? "Recording"
+        : "Idle"
 
   return (
     <main className="space-y-6">
       <header className="space-y-1">
         <h1 className="text-2xl font-semibold">Dashboard</h1>
         <p className="text-sm text-zinc-400">
-          Type a message and press Stop to send it to the assistant.
+          Press Start to record a message, then press Stop to send it to the
+          assistant.
         </p>
       </header>
 
@@ -48,17 +52,6 @@ export default function DashboardPage() {
             isRecording={isRecording}
             onToggle={handleToggle}
           />
-          {isRecording && (
-            <input
-              type="text"
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Type a message..."
-              className="flex-1 rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500 focus:outline-none"
-              autoFocus
-            />
-          )}
           <button
             type="button"
             onClick={clear}
@@ -67,7 +60,7 @@ export default function DashboardPage() {
             Clear
           </button>
           <div className="ml-auto text-sm text-zinc-400">
-            Status: {isRecording ? "Recording" : "Idle"}
+            Status: {statusText}
           </div>
         </div>
       </section>
