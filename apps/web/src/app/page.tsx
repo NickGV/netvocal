@@ -3,10 +3,13 @@
 import { useCallback, useEffect, useRef } from "react"
 import { ConversationHistory } from "@/features/voice/components/ConversationHistory"
 import { RecordButton } from "@/features/voice/components/RecordButton"
+import { MeetingForm } from "@/features/meetings/components/MeetingForm"
+import { MeetingList } from "@/features/meetings/components/MeetingList"
 import { TaskForm } from "@/features/tasks/components/TaskForm"
 import { TaskList } from "@/features/tasks/components/TaskList"
 import { useRecorder } from "@/features/voice/hooks/useRecorder"
 import { useRecorderUI } from "@/features/voice/hooks/useRecorderUI"
+import { useMeetings } from "@/features/meetings/hooks/useMeetings"
 import { useTasks } from "@/features/tasks/hooks/useTasks"
 
 const ERROR_DISPLAY_MS = 8000
@@ -25,6 +28,7 @@ export default function DashboardPage() {
   } = useRecorderUI()
   const recorder = useRecorder()
   const tasks = useTasks()
+  const meetings = useMeetings()
   const errorTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   useEffect(() => {
@@ -59,6 +63,13 @@ export default function DashboardPage() {
       tasks.create({ title: data.title })
     },
     [tasks],
+  )
+
+  const handleCreateMeeting = useCallback(
+    (data: { title: string; starts_at: string; ends_at: string }) => {
+      meetings.create(data)
+    },
+    [meetings],
   )
 
   const statusText = !recorder.isSupported
@@ -136,6 +147,24 @@ export default function DashboardPage() {
             <p className="text-sm text-zinc-500">Loading tasks...</p>
           ) : (
             <TaskList tasks={tasks.tasks} />
+          )}
+        </div>
+      </section>
+
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
+        <h2 className="mb-3 text-lg font-medium">Meetings</h2>
+        <div className="space-y-3">
+          <MeetingForm
+            onSubmit={handleCreateMeeting}
+            disabled={meetings.loading}
+          />
+          {meetings.error && (
+            <p className="text-sm text-red-400">{meetings.error.message}</p>
+          )}
+          {meetings.loading ? (
+            <p className="text-sm text-zinc-500">Loading meetings...</p>
+          ) : (
+            <MeetingList meetings={meetings.meetings} />
           )}
         </div>
       </section>

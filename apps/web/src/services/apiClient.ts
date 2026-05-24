@@ -1,3 +1,4 @@
+import type { Meeting, MeetingCreate } from "@/features/meetings/types"
 import type { Task, TaskCreate } from "@/features/tasks/types"
 import type { HistoryResponse, VoiceTurnResponse } from "@/features/voice/types"
 
@@ -178,6 +179,17 @@ export class ApiClient {
 
   async createTask(data: TaskCreate): Promise<Task> {
     return this.request<Task>("/tasks", {
+      method: "POST",
+      body: data,
+    })
+  }
+
+  async getMeetings(): Promise<Meeting[]> {
+    return this.request<Meeting[]>("/meetings")
+  }
+
+  async createMeeting(data: MeetingCreate): Promise<Meeting> {
+    return this.request<Meeting>("/meetings", {
       method: "POST",
       body: data,
     })
