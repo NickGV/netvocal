@@ -1,37 +1,148 @@
 import type { HistoryResponse, VoiceTurnResponse } from "@/features/voice/types"
 
+export type ApiErrorType = "timeout" | "network" | "http" | "unknown"
+
+export class ApiError extends Error {
+  type: ApiErrorType
+  status?: number
+
+  constructor(type: ApiErrorType, message: string, status?: number) {
+    super(message)
+    this.name = "ApiError"
+    this.type = type
+    this.status = status
+  }
+}
+
 type RequestOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
   body?: unknown
   headers?: Record<string, string>
+  timeout?: number
 }
 
 export class ApiClient {
-  constructor(private readonly baseUrl: string) {}
+  constructor(
+    private readonly baseUrl: string,
+    private readonly defaultTimeout = 30000,
+  ) {}
 
   async request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-    const url = new URL(path, this.baseUrl)
+    const timeout = options.timeout ?? this.defaultTimeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeout)
 
-    const res = await fetch(url.toString(), {
-      method: options.method ?? "GET",
-      headers: {
-        "content-type": "application/json",
-        ...(options.headers ?? {}),
-      },
-      body: options.body ? JSON.stringify(options.body) : undefined,
-    })
+    try {
+      const url = new URL(path, this.baseUrl)
 
-    if (!res.ok) {
-      const text = await res.text().catch(() => "")
-      throw new Error(`API ${res.status} ${res.statusText}: ${text}`)
+      const res = await fetch(url.toString(), {
+        method: options.method ?? "GET",
+        headers: {
+          "content-type": "application/json",
+          ...(options.headers ?? {}),
+        },
+        body: options.body ? JSON.stringify(options.body) : undefined,
+        signal: controller.signal,
+      })
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "")
+        throw new ApiError(
+          "http",
+          `Error ${res.status}: ${text || res.statusText}`,
+          res.status,
+        )
+      }
+
+      const contentType = res.headers.get("content-type") ?? ""
+      if (!contentType.includes("application/json")) {
+        return undefined as T
+      }
+
+      return (await res.json()) as T
+    } catch (err) {
+      if (err instanceof ApiError) throw err
+
+      if (
+        err instanceof DOMException &&
+        err.name === "AbortError"
+      ) {
+        throw new ApiError(
+          "timeout",
+          "The request timed out. Please check your connection and try again.",
+        )
+      }
+
+      if (err instanceof TypeError) {
+        throw new ApiError(
+          "network",
+          "Could not connect to the server. Make sure the API is running.",
+        )
+      }
+
+      throw new ApiError(
+        "unknown",
+        err instanceof Error ? err.message : "An unexpected error occurred.",
+      )
+    } finally {
+      clearTimeout(timeoutId)
     }
+  }
 
-    const contentType = res.headers.get("content-type") ?? ""
-    if (!contentType.includes("application/json")) {
-      return undefined as T
+  async rawFetch<T>(
+    url: URL,
+    body: BodyInit,
+    options: { timeout?: number } = {},
+  ): Promise<T> {
+    const timeout = options.timeout ?? this.defaultTimeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+    try {
+      const res = await fetch(url.toString(), {
+        method: "POST",
+        headers: { accept: "application/json" },
+        body,
+        signal: controller.signal,
+      })
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => "")
+        throw new ApiError(
+          "http",
+          `Error ${res.status}: ${text || res.statusText}`,
+          res.status,
+        )
+      }
+
+      return (await res.json()) as T
+    } catch (err) {
+      if (err instanceof ApiError) throw err
+
+      if (
+        err instanceof DOMException &&
+        err.name === "AbortError"
+      ) {
+        throw new ApiError(
+          "timeout",
+          "The request timed out. Please check your connection and try again.",
+        )
+      }
+
+      if (err instanceof TypeError) {
+        throw new ApiError(
+          "network",
+          "Could not connect to the server. Make sure the API is running.",
+        )
+      }
+
+      throw new ApiError(
+        "unknown",
+        err instanceof Error ? err.message : "An unexpected error occurred.",
+      )
+    } finally {
+      clearTimeout(timeoutId)
     }
-
-    return (await res.json()) as T
   }
 
   async postVoiceTurn(
@@ -52,19 +163,7 @@ export class ApiClient {
     const formData = new FormData()
     formData.append("audio", audioBlob, "audio.webm")
     if (sessionId) formData.append("session_id", sessionId)
-
-    const res = await fetch(url.toString(), {
-      method: "POST",
-      headers: { accept: "application/json" },
-      body: formData,
-    })
-
-    if (!res.ok) {
-      const text = await res.text().catch(() => "")
-      throw new Error(`API ${res.status} ${res.statusText}: ${text}`)
-    }
-
-    return (await res.json()) as VoiceTurnResponse
+    return this.rawFetch<VoiceTurnResponse>(url, formData)
   }
 
   async getVoiceHistory(sessionId: string): Promise<HistoryResponse> {

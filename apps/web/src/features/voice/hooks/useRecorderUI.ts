@@ -1,4 +1,7 @@
+"use client"
+
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
+import type { ApiError } from "@/services/apiClient"
 import type { ConversationItem, HistoryEntry } from "@/features/voice/types"
 import { uid } from "@/lib/uid"
 import { getApiClient } from "@/services/apiClient"
@@ -29,6 +32,7 @@ export function useRecorderUI() {
       ts: Date.now(),
     },
   ])
+  const [lastError, setLastError] = useState<ApiError | null>(null)
 
   const sessionIdRef = useRef<string | undefined>(undefined)
 
@@ -76,14 +80,25 @@ export function useRecorderUI() {
       })
   }, [])
 
-  const start = useCallback(() => setIsRecording(true), [])
+  const start = useCallback(() => {
+    setLastError(null)
+    setIsRecording(true)
+  }, [])
+
   const stop = useCallback(() => setIsRecording(false), [])
 
   const clear = useCallback(() => {
     setHistory([])
     sessionIdRef.current = undefined
     getSafeLocalStorage()?.removeItem(SESSION_KEY)
+    setLastError(null)
     setIsRecording(false)
+  }, [])
+
+  const dismissError = useCallback(() => setLastError(null), [])
+
+  const dismissHistoryItem = useCallback((id: string) => {
+    setHistory((prev) => prev.filter((item) => item.id !== id))
   }, [])
 
   const sendTurn = useCallback(async (text: string) => {
@@ -114,13 +129,13 @@ export function useRecorderUI() {
       }
       setHistory((prev) => [...prev, assistantItem])
     } catch (err) {
+      const apiErr = err as ApiError
+      setLastError(apiErr)
+
       const errorItem: ConversationItem = {
         id: uid(),
         role: "system",
-        text:
-          err instanceof Error
-            ? err.message
-            : "An error occurred while processing your request.",
+        text: apiErr.message,
         ts: Date.now(),
       }
       setHistory((prev) => [...prev, errorItem])
@@ -153,13 +168,13 @@ export function useRecorderUI() {
       }
       setHistory((prev) => [...prev, assistantItem])
     } catch (err) {
+      const apiErr = err as ApiError
+      setLastError(apiErr)
+
       const errorItem: ConversationItem = {
         id: uid(),
         role: "system",
-        text:
-          err instanceof Error
-            ? err.message
-            : "An error occurred while processing your audio.",
+        text: apiErr.message,
         ts: Date.now(),
       }
       setHistory((prev) => [...prev, errorItem])
@@ -167,7 +182,18 @@ export function useRecorderUI() {
   }, [])
 
   return useMemo(
-    () => ({ isRecording, history, start, stop, clear, sendTurn, sendTurnAudio }),
-    [isRecording, history, start, stop, clear, sendTurn, sendTurnAudio],
+    () => ({
+      isRecording,
+      history,
+      lastError,
+      start,
+      stop,
+      clear,
+      dismissError,
+      dismissHistoryItem,
+      sendTurn,
+      sendTurnAudio,
+    }),
+    [isRecording, history, lastError, start, stop, clear, dismissError, dismissHistoryItem, sendTurn, sendTurnAudio],
   )
 }

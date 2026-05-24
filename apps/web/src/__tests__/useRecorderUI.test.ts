@@ -114,7 +114,19 @@ describe("useRecorderUI", () => {
     expect(result.current.history.at(-1)?.text).toBe("Hello from the API!")
   })
 
-  it("sendTurn() shows error message on API failure", async () => {
+  it("starts with no lastError", () => {
+    const { result } = renderHook(() => useRecorderUI())
+    expect(result.current.lastError).toBeNull()
+  })
+
+  it("start() clears lastError", () => {
+    const { result } = renderHook(() => useRecorderUI())
+
+    act(() => result.current.start())
+    expect(result.current.lastError).toBeNull()
+  })
+
+  it("sendTurn() shows error message on API failure and sets lastError", async () => {
     const mockPostVoiceTurn = vi
       .fn()
       .mockRejectedValue(new Error("Network error"))
@@ -134,6 +146,41 @@ describe("useRecorderUI", () => {
     })
     expect(result.current.history.at(-1)?.role).toBe("system")
     expect(result.current.history.at(-1)?.text).toContain("Network error")
+    expect(result.current.lastError).not.toBeNull()
+    expect(result.current.lastError?.message).toContain("Network error")
+  })
+
+  it("dismissError clears lastError", async () => {
+    const mockPostVoiceTurn = vi
+      .fn()
+      .mockRejectedValue(new Error("Some error"))
+    ;(getApiClient as ReturnType<typeof vi.fn>).mockReturnValue({
+      postVoiceTurn: mockPostVoiceTurn,
+    })
+
+    const { result } = renderHook(() => useRecorderUI())
+
+    act(() => {
+      result.current.sendTurn("fail")
+    })
+    await waitFor(() => {
+      expect(result.current.lastError).not.toBeNull()
+    })
+
+    act(() => {
+      result.current.dismissError()
+    })
+    expect(result.current.lastError).toBeNull()
+  })
+
+  it("dismissHistoryItem removes item from history", () => {
+    const { result } = renderHook(() => useRecorderUI())
+    const firstId = result.current.history[0].id
+
+    act(() => {
+      result.current.dismissHistoryItem(firstId)
+    })
+    expect(result.current.history).toHaveLength(0)
   })
 
   it("sendTurn() ignores empty text", () => {
@@ -179,7 +226,7 @@ describe("useRecorderUI", () => {
     )
   })
 
-  it("sendTurnAudio() shows error on API failure", async () => {
+  it("sendTurnAudio() shows error on API failure and sets lastError", async () => {
     const mockPostVoiceTurnAudio = vi
       .fn()
       .mockRejectedValue(new Error("Audio API error"))
@@ -200,5 +247,6 @@ describe("useRecorderUI", () => {
     })
     expect(result.current.history.at(-1)?.role).toBe("system")
     expect(result.current.history.at(-1)?.text).toContain("Audio API error")
+    expect(result.current.lastError?.message).toContain("Audio API error")
   })
 })
