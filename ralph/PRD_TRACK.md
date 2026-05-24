@@ -23,9 +23,10 @@
   - Enviar audio blob al backend POST /voice/turn/audio
   - Dependencia: FE-4.1
 
-- [ ] `[FE]` **#4.3** Consumir historial real desde `GET /voice/history` — [#18](https://github.com/NickGV/netvocal/issues/18)
-  - Reemplazar datos mock en ConversationHistory con llamada API real
-  - Cargar historial al iniciar sesión
+- [x] `[FE]` **#4.3** Consumir historial real desde `GET /voice/history` — [#18](https://github.com/NickGV/netvocal/issues/18)
+  - Eliminar mock greeting ("Hi — I'm ready when you are.")
+  - Agregar `historyLoading` state para feedback de carga
+  - Loading indicator en Conversation mientras se obtiene historial
   - Dependencia: BE-1.4 ✅
 
 - [ ] `[FE]` **#4.4** Manejar y mostrar errores del backend en UI — [#19](https://github.com/NickGV/netvocal/issues/19)
