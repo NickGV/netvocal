@@ -1,6 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useRef } from "react"
+import { ApiError } from "@/services/apiClient"
 import { ConversationHistory } from "@/features/voice/components/ConversationHistory"
 import { QuickCommand } from "@/features/voice/components/QuickCommand"
 import { RecordButton } from "@/features/voice/components/RecordButton"
@@ -17,12 +18,10 @@ const ERROR_DISPLAY_MS = 8000
 
 export default function DashboardPage() {
   const {
-    isRecording,
     history,
     historyLoading,
     lastError,
-    start,
-    stop,
+    setLastError,
     clear,
     dismissError,
     dismissHistoryItem,
@@ -42,6 +41,12 @@ export default function DashboardPage() {
   }, [recorder.audioBlob, sendTurnAudio, recorder])
 
   useEffect(() => {
+    if (recorder.error) {
+      setLastError(new ApiError("unknown", recorder.error))
+    }
+  }, [recorder.error, setLastError])
+
+  useEffect(() => {
     if (lastError) {
       if (errorTimerRef.current) clearTimeout(errorTimerRef.current)
       errorTimerRef.current = setTimeout(dismissError, ERROR_DISPLAY_MS)
@@ -52,14 +57,12 @@ export default function DashboardPage() {
   }, [lastError, dismissError])
 
   const handleToggle = useCallback(() => {
-    if (isRecording) {
-      stop()
+    if (recorder.isRecording) {
       recorder.stopRecording()
     } else {
-      start()
       recorder.startRecording()
     }
-  }, [isRecording, start, stop, recorder])
+  }, [recorder])
 
   const handleCreateTask = useCallback(
     (data: { title: string }) => {
@@ -98,13 +101,13 @@ export default function DashboardPage() {
       ? recorder.error
       : lastError
         ? "Error"
-        : isRecording
+        : recorder.isRecording
           ? "Recording"
           : "Idle"
 
   const statusClass = lastError
     ? "text-red-400"
-    : isRecording
+    : recorder.isRecording
       ? "text-emerald-400"
       : "text-zinc-400"
 
@@ -135,12 +138,15 @@ export default function DashboardPage() {
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
         <div className="flex flex-wrap items-center gap-3">
           <RecordButton
-            isRecording={isRecording}
+            isRecording={recorder.isRecording}
             onToggle={handleToggle}
           />
           <button
             type="button"
-            onClick={clear}
+            onClick={() => {
+              if (recorder.isRecording) recorder.stopRecording()
+              clear()
+            }}
             className="rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm hover:bg-zinc-800"
           >
             Clear

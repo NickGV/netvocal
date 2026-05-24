@@ -1,11 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
 import { renderHook, act, waitFor } from "@testing-library/react"
+import { ApiError } from "@/services/apiClient"
 import { useRecorderUI } from "@/features/voice/hooks/useRecorderUI"
 import { getApiClient } from "@/services/apiClient"
 
-vi.mock("@/services/apiClient", () => ({
-  getApiClient: vi.fn(),
-}))
+vi.mock("@/services/apiClient", async (importOriginal) => {
+  const mod = await importOriginal()
+  return {
+    ...(mod as Record<string, unknown>),
+    getApiClient: vi.fn(),
+  }
+})
 
 describe("useRecorderUI", () => {
   beforeEach(() => {
@@ -31,29 +36,16 @@ describe("useRecorderUI", () => {
 
   it("starts with empty history and loading finishes when no session", () => {
     const { result } = renderHook(() => useRecorderUI())
-    expect(result.current.isRecording).toBe(false)
     expect(result.current.history).toHaveLength(0)
     expect(result.current.historyLoading).toBe(false)
   })
 
-  it("start() sets isRecording to true", () => {
+  it("clear() resets history to empty", () => {
     const { result } = renderHook(() => useRecorderUI())
-    act(() => result.current.start())
-    expect(result.current.isRecording).toBe(true)
-  })
+    act(() => result.current.addSystemMessage("test"))
+    expect(result.current.history).not.toHaveLength(0)
 
-  it("stop() sets isRecording to false", () => {
-    const { result } = renderHook(() => useRecorderUI())
-    act(() => result.current.start())
-    act(() => result.current.stop())
-    expect(result.current.isRecording).toBe(false)
-  })
-
-  it("clear() resets history to empty and stops recording", () => {
-    const { result } = renderHook(() => useRecorderUI())
-    act(() => result.current.start())
     act(() => result.current.clear())
-    expect(result.current.isRecording).toBe(false)
     expect(result.current.history).toHaveLength(0)
   })
 
@@ -121,11 +113,14 @@ describe("useRecorderUI", () => {
     expect(result.current.lastError).toBeNull()
   })
 
-  it("start() clears lastError", () => {
+  it("setLastError updates lastError", () => {
     const { result } = renderHook(() => useRecorderUI())
-
-    act(() => result.current.start())
     expect(result.current.lastError).toBeNull()
+
+    const err = new ApiError("unknown", "test error")
+    act(() => result.current.setLastError(err))
+    expect(result.current.lastError?.message).toBe("test error")
+    expect(result.current.lastError?.type).toBe("unknown")
   })
 
   it("sendTurn() shows error message on API failure and sets lastError", async () => {

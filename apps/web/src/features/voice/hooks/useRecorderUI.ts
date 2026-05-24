@@ -23,7 +23,6 @@ function getSafeLocalStorage(): Storage | null {
 }
 
 export function useRecorderUI() {
-  const [isRecording, setIsRecording] = useState(false)
   const [history, setHistory] = useState<ConversationItem[]>([])
   const [historyLoading, setHistoryLoading] = useState(true)
   const [lastError, setLastError] = useState<ApiError | null>(null)
@@ -83,19 +82,11 @@ export function useRecorderUI() {
       })
   }, [])
 
-  const start = useCallback(() => {
-    setLastError(null)
-    setIsRecording(true)
-  }, [])
-
-  const stop = useCallback(() => setIsRecording(false), [])
-
   const clear = useCallback(() => {
     setHistory([])
     sessionIdRef.current = undefined
     getSafeLocalStorage()?.removeItem(SESSION_KEY)
     setLastError(null)
-    setIsRecording(false)
   }, [])
 
   const dismissError = useCallback(() => setLastError(null), [])
@@ -196,12 +187,10 @@ export function useRecorderUI() {
 
   return useMemo(
     () => ({
-      isRecording,
       history,
       historyLoading,
       lastError,
-      start,
-      stop,
+      setLastError,
       clear,
       dismissError,
       dismissHistoryItem,
@@ -209,6 +198,6 @@ export function useRecorderUI() {
       sendTurn,
       sendTurnAudio,
     }),
-    [isRecording, history, historyLoading, lastError, start, stop, clear, dismissError, dismissHistoryItem, addSystemMessage, sendTurn, sendTurnAudio],
+    [history, historyLoading, lastError, setLastError, clear, dismissError, dismissHistoryItem, addSystemMessage, sendTurn, sendTurnAudio],
   )
 }
