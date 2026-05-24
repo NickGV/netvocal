@@ -14,7 +14,7 @@
 - [x] `[INFRA]` **#6.3** Documentar happy path completo en README
 - [x] `[INFRA]` **#6.4** Docker Compose para dev
 
-### Fase FE-1: Frontend — Pipeline real
+### ✅ Fase FE-1: Frontend — Pipeline real
 
 - [x] `[FE]` **#4.1** Conectar botón de grabación al endpoint real `/voice/turn` (texto) — [#16](https://github.com/NickGV/netvocal/issues/16)
 
@@ -31,9 +31,10 @@
   - Loading indicator en Conversation mientras se obtiene historial
   - Dependencia: BE-1.4 ✅
 
-- [ ] `[FE]` **#4.4** Manejar y mostrar errores del backend en UI — [#19](https://github.com/NickGV/netvocal/issues/19)
-  - Timeout, conexión rechazada, errores HTTP
-  - Feedback visual al usuario
+- [x] `[FE]` **#4.4** Manejar y mostrar errores del backend en UI — [#19](https://github.com/NickGV/netvocal/issues/19)
+  - Banner de error con colores e íconos por tipo (timeout, network, http, unknown)
+  - History fetch fallido también dispara `lastError`
+  - QuickCommand propaga errores via `onError` al banner global
   - Dependencia: FE-4.1
 
 ### ✅ Fase FE-2: Frontend — Tasks & Meetings UI
@@ -76,10 +77,10 @@ FE-5.3 → FE-5.1, FE-5.2
 - [x] Tests de frontend pasando (vitest)
 - [x] README documentado
 - [x] Docker Compose funcional
-- [ ] La UI envía texto al backend y muestra respuesta real
-- [ ] La grabación de audio funciona end-to-end
-- [ ] El historial se recupera al recargar la página
-- [ ] Los errores se muestran con mensajes claros al usuario
-- [ ] Dashboard de tareas funcionando con backend real
-- [ ] Dashboard de reuniones funcionando con backend real
-- [ ] Comandos de voz crean tareas y reuniones automáticamente
+- [x] La UI envía texto al backend y muestra respuesta real
+- [x] La grabación de audio funciona end-to-end
+- [x] El historial se recupera al recargar la página
+- [x] Los errores se muestran con mensajes claros al usuario
+- [x] Dashboard de tareas funcionando con backend real
+- [x] Dashboard de reuniones funcionando con backend real
+- [x] Comandos de voz crean tareas y reuniones automáticamente
