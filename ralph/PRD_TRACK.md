@@ -16,10 +16,7 @@
 
 ### Fase FE-1: Frontend — Pipeline real
 
-- [ ] `[FE]` **#4.1** Conectar botón de grabación al endpoint real `/voice/turn` (texto) — [#16](https://github.com/NickGV/netvocal/issues/16)
-  - Enviar texto al backend POST /voice/turn
-  - Mostrar respuesta real en el historial
-  - Reemplazar addMockTurn por envío real
+- [x] `[FE]` **#4.1** Conectar botón de grabación al endpoint real `/voice/turn` (texto) — [#16](https://github.com/NickGV/netvocal/issues/16)
 
 - [ ] `[FE]` **#4.2** Capturar audio real del micrófono (MediaRecorder API) — [#17](https://github.com/NickGV/netvocal/issues/17)
   - Reemplazar el estado `isRecording` mock por grabación real
@@ -36,21 +33,23 @@
   - Feedback visual al usuario
   - Dependencia: FE-4.1
 
-### Fase FE-2: Frontend — Tasks & Meetings UI
+### ✅ Fase FE-2: Frontend — Tasks & Meetings UI
 
-- [ ] `[FE]` **#5.1** UI para listar y crear tareas desde el dashboard — [#20](https://github.com/NickGV/netvocal/issues/20)
+- [x] `[FE]` **#5.1** UI para listar y crear tareas desde el dashboard — [#20](https://github.com/NickGV/netvocal/issues/20)
   - Lista de tareas pendientes (GET /tasks)
   - Formulario inline de creación (POST /tasks)
   - Dependencia: BE-2.1 ✅ (ya integrado)
 
-- [ ] `[FE]` **#5.2** UI para listar y crear reuniones desde el dashboard — [#21](https://github.com/NickGV/netvocal/issues/21)
+- [x] `[FE]` **#5.2** UI para listar y crear reuniones desde el dashboard — [#21](https://github.com/NickGV/netvocal/issues/21)
   - Vista de reuniones agendadas (GET /meetings)
   - Formulario inline de creación (POST /meetings)
   - Dependencia: BE-2.2 ✅
 
-- [ ] `[FE]` **#5.3** Integrar comandos de voz con tasks/meetings — [#22](https://github.com/NickGV/netvocal/issues/22)
-  - "Crea una tarea..." → llama a POST /tasks vía /intent/parse
-  - "Agenda una reunión..." → llama a POST /meetings vía /intent/parse
+- [x] `[FE]` **#5.3** Integrar comandos de voz con tasks/meetings — [#22](https://github.com/NickGV/netvocal/issues/22)
+  - `parseIntent()` en ApiClient para POST /intent/parse
+  - `addSystemMessage()` en useRecorderUI para mensajes externos
+  - Componente QuickCommand con input de texto + parsing de intentos
+  - Callbacks de refresco de tareas y reuniones por intento
   - Dependencia: FE-5.1, FE-5.2
 
 ---
