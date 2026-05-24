@@ -3,8 +3,11 @@
 import { useCallback, useEffect, useRef } from "react"
 import { ConversationHistory } from "@/features/voice/components/ConversationHistory"
 import { RecordButton } from "@/features/voice/components/RecordButton"
+import { TaskForm } from "@/features/tasks/components/TaskForm"
+import { TaskList } from "@/features/tasks/components/TaskList"
 import { useRecorder } from "@/features/voice/hooks/useRecorder"
 import { useRecorderUI } from "@/features/voice/hooks/useRecorderUI"
+import { useTasks } from "@/features/tasks/hooks/useTasks"
 
 const ERROR_DISPLAY_MS = 8000
 
@@ -21,6 +24,7 @@ export default function DashboardPage() {
     sendTurnAudio,
   } = useRecorderUI()
   const recorder = useRecorder()
+  const tasks = useTasks()
   const errorTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   useEffect(() => {
@@ -49,6 +53,13 @@ export default function DashboardPage() {
       recorder.startRecording()
     }
   }, [isRecording, start, stop, recorder])
+
+  const handleCreateTask = useCallback(
+    (data: { title: string }) => {
+      tasks.create({ title: data.title })
+    },
+    [tasks],
+  )
 
   const statusText = !recorder.isSupported
     ? "Mic not supported"
@@ -112,6 +123,21 @@ export default function DashboardPage() {
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
         <h2 className="mb-3 text-lg font-medium">Conversation</h2>
         <ConversationHistory items={history} onDismiss={dismissHistoryItem} />
+      </section>
+
+      <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
+        <h2 className="mb-3 text-lg font-medium">Tasks</h2>
+        <div className="space-y-3">
+          <TaskForm onSubmit={handleCreateTask} disabled={tasks.loading} />
+          {tasks.error && (
+            <p className="text-sm text-red-400">{tasks.error.message}</p>
+          )}
+          {tasks.loading ? (
+            <p className="text-sm text-zinc-500">Loading tasks...</p>
+          ) : (
+            <TaskList tasks={tasks.tasks} />
+          )}
+        </div>
       </section>
     </main>
   )

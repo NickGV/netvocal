@@ -1,3 +1,4 @@
+import type { Task, TaskCreate } from "@/features/tasks/types"
 import type { HistoryResponse, VoiceTurnResponse } from "@/features/voice/types"
 
 export type ApiErrorType = "timeout" | "network" | "http" | "unknown"
@@ -169,6 +170,17 @@ export class ApiClient {
   async getVoiceHistory(sessionId: string): Promise<HistoryResponse> {
     const params = new URLSearchParams({ session_id: sessionId })
     return this.request<HistoryResponse>(`/voice/history?${params.toString()}`)
+  }
+
+  async getTasks(): Promise<Task[]> {
+    return this.request<Task[]>("/tasks")
+  }
+
+  async createTask(data: TaskCreate): Promise<Task> {
+    return this.request<Task>("/tasks", {
+      method: "POST",
+      body: data,
+    })
   }
 }
 
