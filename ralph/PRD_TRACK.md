@@ -18,9 +18,11 @@
 
 - [x] `[FE]` **#4.1** Conectar botón de grabación al endpoint real `/voice/turn` (texto) — [#16](https://github.com/NickGV/netvocal/issues/16)
 
-- [ ] `[FE]` **#4.2** Capturar audio real del micrófono (MediaRecorder API) — [#17](https://github.com/NickGV/netvocal/issues/17)
-  - Reemplazar el estado `isRecording` mock por grabación real
-  - Enviar audio blob al backend POST /voice/turn/audio
+- [x] `[FE]` **#4.2** Capturar audio real del micrófono (MediaRecorder API) — [#17](https://github.com/NickGV/netvocal/issues/17)
+  - Eliminar estado `isRecording` mock de `useRecorderUI`
+  - `page.tsx` usa `recorder.isRecording` directo del MediaRecorder real
+  - Errores del recorder se sincronizan a `lastError` en UI
+  - Botón Clear detiene el recorder si está activo
   - Dependencia: FE-4.1
 
 - [x] `[FE]` **#4.3** Consumir historial real desde `GET /voice/history` — [#18](https://github.com/NickGV/netvocal/issues/18)
