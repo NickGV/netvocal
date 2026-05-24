@@ -24,24 +24,24 @@ function getSafeLocalStorage(): Storage | null {
 
 export function useRecorderUI() {
   const [isRecording, setIsRecording] = useState(false)
-  const [history, setHistory] = useState<ConversationItem[]>(() => [
-    {
-      id: uid(),
-      role: "assistant",
-      text: "Hi — I'm ready when you are.",
-      ts: Date.now(),
-    },
-  ])
+  const [history, setHistory] = useState<ConversationItem[]>([])
+  const [historyLoading, setHistoryLoading] = useState(true)
   const [lastError, setLastError] = useState<ApiError | null>(null)
 
   const sessionIdRef = useRef<string | undefined>(undefined)
 
   useEffect(() => {
     const storage = getSafeLocalStorage()
-    if (!storage) return
+    if (!storage) {
+      setHistoryLoading(false)
+      return
+    }
 
     const stored = storage.getItem(SESSION_KEY) ?? undefined
-    if (!stored) return
+    if (!stored) {
+      setHistoryLoading(false)
+      return
+    }
 
     sessionIdRef.current = stored
 
@@ -77,6 +77,9 @@ export function useRecorderUI() {
           ts: Date.now(),
         }
         setHistory((prev) => [...prev, errorItem])
+      })
+      .finally(() => {
+        setHistoryLoading(false)
       })
   }, [])
 
@@ -195,6 +198,7 @@ export function useRecorderUI() {
     () => ({
       isRecording,
       history,
+      historyLoading,
       lastError,
       start,
       stop,
@@ -205,6 +209,6 @@ export function useRecorderUI() {
       sendTurn,
       sendTurnAudio,
     }),
-    [isRecording, history, lastError, start, stop, clear, dismissError, dismissHistoryItem, addSystemMessage, sendTurn, sendTurnAudio],
+    [isRecording, history, historyLoading, lastError, start, stop, clear, dismissError, dismissHistoryItem, addSystemMessage, sendTurn, sendTurnAudio],
   )
 }

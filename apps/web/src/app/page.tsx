@@ -19,6 +19,7 @@ export default function DashboardPage() {
   const {
     isRecording,
     history,
+    historyLoading,
     lastError,
     start,
     stop,
@@ -152,7 +153,11 @@ export default function DashboardPage() {
 
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
         <h2 className="mb-3 text-lg font-medium">Conversation</h2>
-        <ConversationHistory items={history} onDismiss={dismissHistoryItem} />
+        {historyLoading ? (
+          <p className="text-sm text-zinc-500">Loading conversation history...</p>
+        ) : (
+          <ConversationHistory items={history} onDismiss={dismissHistoryItem} />
+        )}
       </section>
 
       <section className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">

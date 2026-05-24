@@ -29,12 +29,11 @@ describe("useRecorderUI", () => {
     })
   })
 
-  it("starts with one assistant greeting and isRecording false", () => {
+  it("starts with empty history and loading finishes when no session", () => {
     const { result } = renderHook(() => useRecorderUI())
     expect(result.current.isRecording).toBe(false)
-    expect(result.current.history).toHaveLength(1)
-    expect(result.current.history[0].role).toBe("assistant")
-    expect(result.current.history[0].text).toBe("Hi — I'm ready when you are.")
+    expect(result.current.history).toHaveLength(0)
+    expect(result.current.historyLoading).toBe(false)
   })
 
   it("start() sets isRecording to true", () => {
@@ -78,6 +77,8 @@ describe("useRecorderUI", () => {
 
     const { result } = renderHook(() => useRecorderUI())
 
+    expect(result.current.historyLoading).toBe(true)
+
     await waitFor(() => {
       expect(result.current.history).toHaveLength(2)
     })
@@ -85,6 +86,7 @@ describe("useRecorderUI", () => {
     expect(result.current.history[0].text).toBe("hi")
     expect(result.current.history[1].role).toBe("assistant")
     expect(result.current.history[1].text).toBe("hello")
+    expect(result.current.historyLoading).toBe(false)
   })
 
   it("sendTurn() adds user turn then assistant response on success", async () => {
@@ -175,10 +177,14 @@ describe("useRecorderUI", () => {
 
   it("dismissHistoryItem removes item from history", () => {
     const { result } = renderHook(() => useRecorderUI())
-    const firstId = result.current.history[0].id
 
     act(() => {
-      result.current.dismissHistoryItem(firstId)
+      result.current.addSystemMessage("test")
+    })
+    const itemId = result.current.history[0].id
+
+    act(() => {
+      result.current.dismissHistoryItem(itemId)
     })
     expect(result.current.history).toHaveLength(0)
   })
