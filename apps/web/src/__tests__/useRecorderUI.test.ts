@@ -113,6 +113,25 @@ describe("useRecorderUI", () => {
     expect(result.current.lastError).toBeNull()
   })
 
+  it("sets lastError and error item when history fetch fails", async () => {
+    window.localStorage.setItem("netvocal.voice.session_id", "sid-bad")
+
+    const apiError = new ApiError("http", "Internal Server Error", 500)
+    const mockGetVoiceHistory = vi.fn().mockRejectedValue(apiError)
+    ;(getApiClient as ReturnType<typeof vi.fn>).mockReturnValue({
+      getVoiceHistory: mockGetVoiceHistory,
+    })
+
+    const { result } = renderHook(() => useRecorderUI())
+
+    await waitFor(() => {
+      expect(result.current.historyLoading).toBe(false)
+    })
+    expect(result.current.lastError).not.toBeNull()
+    expect(result.current.lastError?.message).toContain("Internal Server Error")
+    expect(result.current.history.some((item) => item.text.includes("Internal Server Error"))).toBe(true)
+  })
+
   it("setLastError updates lastError", () => {
     const { result } = renderHook(() => useRecorderUI())
     expect(result.current.lastError).toBeNull()

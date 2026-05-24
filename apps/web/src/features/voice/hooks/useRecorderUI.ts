@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import type { ApiError } from "@/services/apiClient"
+import { ApiError } from "@/services/apiClient"
 import type { ConversationItem, HistoryEntry } from "@/features/voice/types"
 import { uid } from "@/lib/uid"
 import { getApiClient } from "@/services/apiClient"
@@ -65,14 +65,14 @@ export function useRecorderUI() {
         })
         setHistory(items)
       })
-      .catch((err) => {
+      .catch((err: unknown) => {
+        const apiErr: ApiError = err instanceof ApiError ? err : new ApiError("network", "Could not load conversation history.")
+        setLastError(apiErr)
+
         const errorItem: ConversationItem = {
           id: uid(),
           role: "system",
-          text:
-            err instanceof Error
-              ? err.message
-              : "Could not load conversation history.",
+          text: apiErr.message,
           ts: Date.now(),
         }
         setHistory((prev) => [...prev, errorItem])

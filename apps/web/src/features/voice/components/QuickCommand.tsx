@@ -7,9 +7,10 @@ type Props = {
   onTaskCreated?: () => void
   onMeetingCreated?: () => void
   onResult?: (message: string) => void
+  onError?: (error: Error) => void
 }
 
-export function QuickCommand({ onTaskCreated, onMeetingCreated, onResult }: Props) {
+export function QuickCommand({ onTaskCreated, onMeetingCreated, onResult, onError }: Props) {
   const [query, setQuery] = useState("")
   const [busy, setBusy] = useState(false)
 
@@ -36,8 +37,10 @@ export function QuickCommand({ onTaskCreated, onMeetingCreated, onResult }: Prop
         }
 
         setQuery("")
-      } catch {
-        onResult?.("Could not process command.")
+      } catch (err) {
+        const msg = "Could not process command."
+        onResult?.(msg)
+        onError?.(err instanceof Error ? err : new Error(msg))
       } finally {
         setBusy(false)
       }

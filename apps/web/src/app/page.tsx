@@ -87,6 +87,17 @@ export default function DashboardPage() {
     [addSystemMessage, tasks, meetings],
   )
 
+  const handleQuickError = useCallback(
+    (err: Error) => {
+      setLastError(
+        err instanceof ApiError
+          ? err
+          : new ApiError("unknown", err.message),
+      )
+    },
+    [setLastError],
+  )
+
   const handleQuickTaskCreated = useCallback(() => {
     tasks.refresh()
   }, [tasks])
@@ -122,13 +133,43 @@ export default function DashboardPage() {
       </header>
 
       {lastError && (
-        <div className="flex items-start gap-3 rounded-lg border border-red-900/60 bg-red-950/30 p-3 text-sm text-red-200">
-          <span className="mt-0.5 shrink-0">⚠</span>
-          <p className="flex-1">{lastError.message}</p>
+        <div
+          className={
+            "flex items-start gap-3 rounded-lg border p-3 text-sm " +
+            (lastError.type === "timeout"
+              ? "border-amber-800/60 bg-amber-950/30 text-amber-200"
+              : lastError.type === "network"
+                ? "border-red-900/60 bg-red-950/30 text-red-200"
+                : lastError.type === "http"
+                  ? "border-orange-800/60 bg-orange-950/30 text-orange-200"
+                  : "border-zinc-700 bg-zinc-900 text-zinc-300")
+          }
+        >
+          <span className="mt-0.5 shrink-0">
+            {lastError.type === "timeout"
+              ? "⏱"
+              : lastError.type === "network"
+                ? "🔌"
+                : lastError.type === "http"
+                  ? "⚠"
+                  : "?"}
+          </span>
+          <div className="flex-1">
+            <p className="font-medium">
+              {lastError.type === "timeout"
+                ? "Request timed out"
+                : lastError.type === "network"
+                  ? "Connection error"
+                  : lastError.type === "http"
+                    ? `Error ${lastError.status ?? ""}`
+                    : "Error"}
+            </p>
+            <p className="mt-0.5 opacity-80">{lastError.message}</p>
+          </div>
           <button
             type="button"
             onClick={dismissError}
-            className="shrink-0 text-red-400 hover:text-red-200"
+            className="shrink-0 opacity-60 hover:opacity-100"
           >
             Dismiss
           </button>
@@ -181,6 +222,7 @@ export default function DashboardPage() {
         </p>
         <QuickCommand
           onResult={handleIntentResult}
+          onError={handleQuickError}
           onTaskCreated={handleQuickTaskCreated}
           onMeetingCreated={handleQuickMeetingCreated}
         />

@@ -69,7 +69,7 @@ describe("QuickCommand", () => {
     expect(onMeetingCreated).toHaveBeenCalled()
   })
 
-  it("shows error message on API failure", async () => {
+  it("shows error message on API failure and calls onError", async () => {
     const mockParseIntent = vi
       .fn()
       .mockRejectedValue(new Error("API error"))
@@ -78,14 +78,17 @@ describe("QuickCommand", () => {
     })
 
     const onResult = vi.fn()
+    const onError = vi.fn()
     const user = userEvent.setup()
 
-    render(<QuickCommand onResult={onResult} />)
+    render(<QuickCommand onResult={onResult} onError={onError} />)
 
     const input = screen.getByPlaceholderText(/crea una tarea/i)
     await user.type(input, "fail")
     await user.click(screen.getByRole("button", { name: "Send" }))
 
     expect(onResult).toHaveBeenCalledWith("Could not process command.")
+    expect(onError).toHaveBeenCalledWith(expect.any(Error))
+    expect(onError.mock.calls[0][0].message).toBe("API error")
   })
 })
