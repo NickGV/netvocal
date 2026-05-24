@@ -1,4 +1,4 @@
-import type { VoiceTurnResponse } from "@/features/voice/types"
+import type { HistoryResponse, VoiceTurnResponse } from "@/features/voice/types"
 
 type RequestOptions = {
   method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
@@ -65,6 +65,11 @@ export class ApiClient {
     }
 
     return (await res.json()) as VoiceTurnResponse
+  }
+
+  async getVoiceHistory(sessionId: string): Promise<HistoryResponse> {
+    const params = new URLSearchParams({ session_id: sessionId })
+    return this.request<HistoryResponse>(`/voice/history?${params.toString()}`)
   }
 }
 

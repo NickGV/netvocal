@@ -10,6 +10,23 @@ vi.mock("@/services/apiClient", () => ({
 describe("useRecorderUI", () => {
   beforeEach(() => {
     vi.clearAllMocks()
+
+    const store = new Map<string, string>()
+    Object.defineProperty(window, "localStorage", {
+      value: {
+        getItem: (k: string) => store.get(k) ?? null,
+        setItem: (k: string, v: string) => {
+          store.set(k, v)
+        },
+        removeItem: (k: string) => {
+          store.delete(k)
+        },
+        clear: () => {
+          store.clear()
+        },
+      },
+      configurable: true,
+    })
   })
 
   it("starts with one assistant greeting and isRecording false", () => {
@@ -39,6 +56,35 @@ describe("useRecorderUI", () => {
     act(() => result.current.clear())
     expect(result.current.isRecording).toBe(false)
     expect(result.current.history).toHaveLength(0)
+  })
+
+  it("loads history from API when session_id exists in localStorage", async () => {
+    window.localStorage.setItem("netvocal.voice.session_id", "sid-1")
+
+    const mockGetVoiceHistory = vi.fn().mockResolvedValue({
+      session_id: "sid-1",
+      turns: [
+        { role: "user", text: "hi", timestamp: "2026-01-01T00:00:00Z" },
+        {
+          role: "assistant",
+          text: "hello",
+          timestamp: "2026-01-01T00:00:01Z",
+        },
+      ],
+    })
+    ;(getApiClient as ReturnType<typeof vi.fn>).mockReturnValue({
+      getVoiceHistory: mockGetVoiceHistory,
+    })
+
+    const { result } = renderHook(() => useRecorderUI())
+
+    await waitFor(() => {
+      expect(result.current.history).toHaveLength(2)
+    })
+    expect(result.current.history[0].role).toBe("user")
+    expect(result.current.history[0].text).toBe("hi")
+    expect(result.current.history[1].role).toBe("assistant")
+    expect(result.current.history[1].text).toBe("hello")
   })
 
   it("sendTurn() adds user turn then assistant response on success", async () => {
