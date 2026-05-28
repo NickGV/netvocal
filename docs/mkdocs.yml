@@ -1,0 +1,15 @@
+site_name: "NETVOCAL — Software Journey"
+site_description: "Bitácora de co-creación y análisis arquitectónico del DevVoice Assistant"
+repo_url: https://github.com/NickGV/netvocal
+theme:
+  name: material
+  palette:
+    primary: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+nav:
+  - "Inicio": index.md
+  - "Bala Trazadora": 01-tracer-bullet.md
+  - "Deep vs Shallow Modules": 02-deep-shallow-modules.md
+  - "Veredicto Retrospectivo": 03-retrospective-verdict.md
