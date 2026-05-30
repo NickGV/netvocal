@@ -30,4 +30,7 @@
 2026-05-23: [#12] BE-3.1 Unit tests for STT, LLM, TTS services — 61fbe69
 2026-05-23: [#13] BE-3.2 Integration tests for voice pipeline — 64db641
 2026-05-23: [#14] BE-3.3 Error handling and robustness tests — 80a7564
+
+# === Fase 5: Software Architecture Analysis ===
+2026-05-28: [#32] Architecture analysis: Deep vs Shallow modules (Ousterhout principles) — d5d7977
 2026-05-27: [#31] Software Journey section (tracer bullet) — 21338f1
