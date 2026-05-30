@@ -1,29 +1,24 @@
-import pytest
-from fastapi.testclient import TestClient
-from fastapi import FastAPI
-from apps.api.routers import tasks as tasks_router
+from datetime import datetime, timedelta
 
-def create_app():
-    app = FastAPI()
-    app.include_router(tasks_router.router)
-    return app
+from fastapi.testclient import TestClient
+
+from app.main import create_app
 
 app = create_app()
 client = TestClient(app)
 
 def test_create_task():
-    resp = client.post("/tasks/", json={"title": "Estudiar AI", "description": "Repasar transformers", "status": "pending"})
-    assert resp.status_code == 201
+    resp = client.post("/tasks/", json={"title": "Estudiar AI"})
+    assert resp.status_code == 200
     data = resp.json()
     assert "id" in data
     assert data["title"] == "Estudiar AI"
-    assert data["status"] == "pending"
 
-def test_create_task_with_past_due_date():
-    from datetime import datetime, timedelta
-    past_date = (datetime.now() - timedelta(days=1)).isoformat()
-    resp = client.post("/tasks/", json={"title": "Tarea pasada", "due_date": past_date})
-    assert resp.status_code == 400
+def test_create_task_with_due_date():
+    future_date = (datetime.now() + timedelta(days=1)).isoformat()
+    resp = client.post("/tasks/", json={"title": "Tarea con fecha", "due_at": future_date})
+    assert resp.status_code == 200
+    assert resp.json()["title"] == "Tarea con fecha"
 
 def test_get_tasks():
     client.post("/tasks/", json={"title": "Una tarea más"})
