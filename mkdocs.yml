@@ -1,6 +1,7 @@
 site_name: "NETVOCAL — Software Journey"
 site_description: "Bitácora de co-creación y análisis arquitectónico del DevVoice Assistant"
 repo_url: https://github.com/NickGV/netvocal
+docs_dir: docs
 theme:
   name: material
   palette:

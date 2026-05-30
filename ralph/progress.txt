@@ -33,3 +33,4 @@
 
 # === Fase 5: Software Architecture Analysis ===
 2026-05-28: [#32] Architecture analysis: Deep vs Shallow modules (Ousterhout principles) — d5d7977
+2026-05-27: [#31] Software Journey section (tracer bullet) — 21338f1

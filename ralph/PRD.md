@@ -88,6 +88,8 @@
 
 ### Fase INFRA: Infraestructura y Documentación
 
+- [x] `[DOC]` **#31** Software Journey section (“Tracer Bullet”) en docs/01-tracer-bullet.md
+
 - [ ] `[INFRA]` **#6.1** Configurar variables de entorno completas — [#8](https://github.com/NickGV/netvocal/issues/8)
   - `.env.example` con todas las vars necesarias
   - Documentar en README
