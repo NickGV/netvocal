@@ -1,0 +1,1693 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Bitácora de co-creación y análisis arquitectónico del DevVoice Assistant">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Plan de Entrega Final — Tarea 3: Software Journey - NETVOCAL — Software Journey</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#plan-de-entrega-final-tarea-3-software-journey" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="NETVOCAL — Software Journey" class="md-header__button md-logo" aria-label="NETVOCAL — Software Journey" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NETVOCAL — Software Journey
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Plan de Entrega Final — Tarea 3: Software Journey
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/NickGV/netvocal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../01-tracer-bullet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Bala Trazadora
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../02-deep-shallow-modules/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Deep vs Shallow Modules
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../03-retrospective-verdict/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Veredicto Retrospectivo
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="NETVOCAL — Software Journey" class="md-nav__button md-logo" aria-label="NETVOCAL — Software Journey" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NETVOCAL — Software Journey
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/NickGV/netvocal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-tracer-bullet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bala Trazadora
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-deep-shallow-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep vs Shallow Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-retrospective-verdict/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Veredicto Retrospectivo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#resumen-de-lo-que-hay-que-entregar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resumen de lo que hay que entregar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resumen de lo que hay que entregar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deliverable-1-repositorio-limpio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverable 1: Repositorio Limpio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deliverable-2-sitio-de-documentacion-del-viaje-software-journey" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deliverable 2: Sitio de Documentación del Viaje (Software Journey)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asignacion-de-developers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Asignación de Developers
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paso-0-eliminar-rama-developkevin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ⚠️ Paso 0: Eliminar rama developkevin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-30-infra-limpieza-del-repo-y-setup-de-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #30 — [INFRA] Limpieza del repo y setup de MkDocs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #30 — [INFRA] Limpieza del repo y setup de MkDocs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tareas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tareas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tareas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#301-verificar-que-los-tests-del-backend-pasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.1 Verificar que los tests del backend pasan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#302-verificar-tests-del-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.2 Verificar tests del frontend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#303-instalar-mkdocs-y-el-tema-material" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.3 Instalar MkDocs y el tema Material
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#304-crear-estructura-de-docs-con-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.4 Crear estructura de docs con MkDocs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#305-configurar-mkdocsyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.5 Configurar mkdocs.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#306-configurar-github-pages-con-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.6 Configurar GitHub Pages con MkDocs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#307-verificar-sitio-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.7 Verificar sitio local
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#308-commit-inicial-del-skeleton" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        30.8 Commit inicial del skeleton
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-31-doc-seccion-1-la-bala-trazadora-y-el-enrutamiento-de-skills" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #31 — [DOC] Sección 1: La Bala Trazadora y el Enrutamiento de Skills
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #31 — [DOC] Sección 1: La Bala Trazadora y el Enrutamiento de Skills">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-sugerida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura sugerida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura sugerida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-el-arbol-de-diseno-y-las-assumptions-iniciales" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.1 El árbol de diseño y las assumptions iniciales
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-identificacion-del-riesgo-mas-alto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.2 Identificación del riesgo más alto
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-la-bala-trazadora-en-accion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.3 La Bala Trazadora en acción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#314-feedback-temprano-y-correccion-de-rumbo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.4 Feedback temprano y corrección de rumbo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#315-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        31.5 Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-32-doc-seccion-2-anatomia-de-la-complejidad-deep-vs-shallow-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #32 — [DOC] Sección 2: Anatomía de la Complejidad (Deep vs Shallow Modules)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #32 — [DOC] Sección 2: Anatomía de la Complejidad (Deep vs Shallow Modules)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-sugerida_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura sugerida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura sugerida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-introduccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32.1 Introducción
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-modulos-profundos-deep-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32.2 Módulos Profundos (Deep Modules)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-modulos-superficiales-shallow-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32.3 Módulos Superficiales (Shallow Modules)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#324-fuga-de-informacion-information-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32.4 Fuga de Información (Information Leakage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#325-conclusiones-y-recomendaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        32.5 Conclusiones y recomendaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-33-doc-seccion-3-el-veredicto-retrospectivo-de-los-sub-agentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #33 — [DOC] Sección 3: El Veredicto Retrospectivo de los Sub-Agentes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #33 — [DOC] Sección 3: El Veredicto Retrospectivo de los Sub-Agentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivo_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#estructura-sugerida_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Estructura sugerida
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Estructura sugerida">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-el-debate-arquitectonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.1 El debate arquitectónico
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-impacto-en-la-velocidad-de-desarrollo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.2 Impacto en la velocidad de desarrollo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-change-amplification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.3 Change Amplification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        33.4 Conclusión
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-34-infra-e2e-final-y-lanzamiento-del-sitio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #34 — [INFRA] E2E final y lanzamiento del sitio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #34 — [INFRA] E2E final y lanzamiento del sitio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tareas_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tareas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tareas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-verificar-e2e" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.1 Verificar E2E
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-ultimo-build-de-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.2 Último build de MkDocs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-verificar-deploy-del-docs-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.3 Verificar deploy del docs site
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344-release-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.4 Release tag
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#345-registrar-urls-de-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        34.5 Registrar URLs de entrega
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#issue-35-doc-integracion-y-revision-cruzada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Issue #35 — [DOC] Integración y revisión cruzada
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Issue #35 — [DOC] Integración y revisión cruzada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tareas_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tareas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tareas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-revisar-y-unificar-tono" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35.1 Revisar y unificar tono
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-completar-docsindexmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35.2 Completar docs/index.md
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#353-verificar-navegacion-mkdocs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35.3 Verificar navegación MkDocs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#354-armado-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35.4 Armado final
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#355-verificar-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        35.5 Verificar deploy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#timeline-sugerido-3-4-dias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Timeline Sugerido (3-4 días)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ---
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checklist-final-de-la-entrega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Checklist final de la entrega
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="plan-de-entrega-final-tarea-3-software-journey">Plan de Entrega Final — Tarea 3: Software Journey</h1>
+<blockquote>
+<p><strong>Proyecto:</strong> NETVOCAL — DevVoice Assistant
+<strong>Equipo:</strong> Nicolas Gomez, Elber Mendoza, Estiven Bernal, Kevin Rojas
+<strong>Repo:</strong> https://github.com/NickGV/netvocal</p>
+</blockquote>
+<hr />
+<h2 id="resumen-de-lo-que-hay-que-entregar">Resumen de lo que hay que entregar</h2>
+<h3 id="deliverable-1-repositorio-limpio">Deliverable 1: Repositorio Limpio</h3>
+<p>Una rama <code>main</code> estable, con historial transparente, sin ramas colgando,
+y todas las suites de prueba pasando al 100%.</p>
+<h3 id="deliverable-2-sitio-de-documentacion-del-viaje-software-journey">Deliverable 2: Sitio de Documentación del Viaje (Software Journey)</h3>
+<p>Un sitio web estático generado con <strong>MkDocs + Material for MkDocs</strong>
+en la carpeta <code>/docs</code>, con 3 secciones obligatorias fundamentadas en
+<em>A Philosophy of Software Design</em> de John Ousterhout.</p>
+<hr />
+<h2 id="asignacion-de-developers">Asignación de Developers</h2>
+<table>
+<thead>
+<tr>
+<th>Developer</th>
+<th>Rol</th>
+<th>Issues</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kevin</strong></td>
+<td>Merge Captain &amp; Infra</td>
+<td>#30, #34</td>
+</tr>
+<tr>
+<td><strong>Elber</strong></td>
+<td>Sección 1 — Bala Trazadora</td>
+<td>#31</td>
+</tr>
+<tr>
+<td><strong>Estiven</strong></td>
+<td>Sección 2 — Anatomía de la Complejidad</td>
+<td>#32</td>
+</tr>
+<tr>
+<td><strong>Nicolas</strong></td>
+<td>Sección 3 — Veredicto Retrospectivo + Integración final</td>
+<td>#33, #35</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="-">---</h2>
+<h2 id="paso-0-eliminar-rama-developkevin">⚠️ Paso 0: Eliminar rama <code>developkevin</code></h2>
+<p><strong>Lo hace Kevin antes de arrancar.</strong></p>
+<pre><code class="language-bash"># Verificar que es la rama correcta
+git fetch origin
+git log origin/developkevin --not origin/main --oneline
+# Si solo tiene basura, borrar:
+git push origin --delete developkevin
+</code></pre>
+<hr />
+<h2 id="issue-30-infra-limpieza-del-repo-y-setup-de-mkdocs">Issue #30 — [INFRA] Limpieza del repo y setup de MkDocs</h2>
+<p><strong>Asignado:</strong> Kevin</p>
+<h3 id="tareas">Tareas</h3>
+<h4 id="301-verificar-que-los-tests-del-backend-pasan">30.1 Verificar que los tests del backend pasan</h4>
+<pre><code class="language-bash">cd apps/api
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e &quot;.[dev]&quot;
+python -m pytest -v
+</code></pre>
+<p>Si algún test falla, arreglarlo o reportar en el issue.</p>
+<h4 id="302-verificar-tests-del-frontend">30.2 Verificar tests del frontend</h4>
+<pre><code class="language-bash">pnpm install
+pnpm -C apps/web test
+</code></pre>
+<p>Ya sabemos que pasan 70/70 ✅, corroborar después de cualquier cambio.</p>
+<h4 id="303-instalar-mkdocs-y-el-tema-material">30.3 Instalar MkDocs y el tema Material</h4>
+<p>Como el proyecto ya usa Python, esto es natural:</p>
+<pre><code class="language-bash">pip install mkdocs mkdocs-material
+</code></pre>
+<p>Verificar instalación:</p>
+<pre><code class="language-bash">mkdocs --version
+</code></pre>
+<h4 id="304-crear-estructura-de-docs-con-mkdocs">30.4 Crear estructura de docs con MkDocs</h4>
+<p>La carpeta <code>docs/</code> ya existe. Inicializar:</p>
+<pre><code class="language-bash">cd /home/nick/Projects/netvocal
+mkdocs new .
+</code></pre>
+<p>Esto crea <code>mkdocs.yml</code> y <code>docs/index.md</code>. La estructura final debe quedar:</p>
+<pre><code>/
+├── mkdocs.yml                  # Configuración principal
+├── docs/
+│   ├── index.md                # Home / Resumen ejecutivo
+│   ├── 01-tracer-bullet.md     # Sección 1
+│   ├── 02-deep-shallow-modules.md  # Sección 2
+│   └── 03-retrospective-verdict.md # Sección 3
+</code></pre>
+<h4 id="305-configurar-mkdocsyml">30.5 Configurar <code>mkdocs.yml</code></h4>
+<pre><code class="language-yaml">site_name: &quot;NETVOCAL — Software Journey&quot;
+site_description: &quot;Bitácora de co-creación y análisis arquitectónico del DevVoice Assistant&quot;
+repo_url: https://github.com/NickGV/netvocal
+theme:
+  name: material
+  palette:
+    primary: indigo
+  features:
+    - navigation.tabs
+    - navigation.sections
+nav:
+  - &quot;Inicio&quot;: index.md
+  - &quot;Bala Trazadora&quot;: 01-tracer-bullet.md
+  - &quot;Deep vs Shallow Modules&quot;: 02-deep-shallow-modules.md
+  - &quot;Veredicto Retrospectivo&quot;: 03-retrospective-verdict.md
+</code></pre>
+<h4 id="306-configurar-github-pages-con-mkdocs">30.6 Configurar GitHub Pages con MkDocs</h4>
+<p>Opción A — GitHub Actions (recomendada):
+Crear <code>.github/workflows/deploy-docs.yml</code>:</p>
+<pre><code class="language-yaml">name: Deploy MkDocs
+on:
+  push:
+    branches: [main]
+    paths: [&quot;docs/**&quot;, &quot;mkdocs.yml&quot;]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: &quot;3.x&quot;
+      - run: pip install mkdocs mkdocs-material
+      - run: mkdocs gh-deploy --force
+</code></pre>
+<p><strong>IMPORTANTE:</strong> Después del primer deploy, ir a:
+Settings → Pages → Source: <strong>Deploy from a branch</strong>
+Branch: <code>gh-pages</code> → <code>/ (root)</code></p>
+<p>Opción B — Manual (si no quieren Actions):</p>
+<pre><code class="language-bash">mkdocs gh-deploy --force
+</code></pre>
+<h4 id="307-verificar-sitio-local">30.7 Verificar sitio local</h4>
+<pre><code class="language-bash">mkdocs serve
+# Abrir http://127.0.0.1:8000
+</code></pre>
+<h4 id="308-commit-inicial-del-skeleton">30.8 Commit inicial del skeleton</h4>
+<pre><code class="language-bash">git add docs/ mkdocs.yml .github/
+git commit -m &quot;chore(docs): init MkDocs skeleton with Material theme&quot;
+git push
+</code></pre>
+<hr />
+<h2 id="issue-31-doc-seccion-1-la-bala-trazadora-y-el-enrutamiento-de-skills">Issue #31 — [DOC] Sección 1: La Bala Trazadora y el Enrutamiento de Skills</h2>
+<p><strong>Asignado:</strong> Elber
+<strong>Archivo:</strong> <code>docs/01-tracer-bullet.md</code></p>
+<h3 id="objetivo">Objetivo</h3>
+<p>Narrar cómo la estrategia de exploración con Ralph y el desglose de issues refinaron las assumptions del equipo ANTES de escribir código, usando la analogía de la "Bala Trazadora" de Ousterhout.</p>
+<h3 id="estructura-sugerida">Estructura sugerida</h3>
+<h4 id="311-el-arbol-de-diseno-y-las-assumptions-iniciales">31.1 El árbol de diseño y las assumptions iniciales</h4>
+<ul>
+<li>Mostrar el PRD original (<code>ralph/PRD.md</code>) y cómo se desglosó en issues verticales</li>
+<li>Explicar cómo Ralph (los scripts <code>once.sh</code>, <code>once_track.sh</code>) forzó a pensar en
+  <em>vertical slices</em> en vez de capas horizontales</li>
+<li>Código de referencia: <code>ralph/once.sh</code> — mostrar el loop de una iteración</li>
+</ul>
+<h4 id="312-identificacion-del-riesgo-mas-alto">31.2 Identificación del riesgo más alto</h4>
+<p>El pipeline de voz completo era lo más incierto del sistema:</p>
+<pre><code>Micrófono → STT (Whisper API) → LLM (OpenAI Chat) → TTS (OpenAI TTS) → Altavoz
+</code></pre>
+<p>Cada integración tenía riesgos: API keys, timeouts, formatos de audio, latencia.
+Ningún developer del equipo había integrado Whisper/OpenAI antes.</p>
+<h4 id="313-la-bala-trazadora-en-accion">31.3 La Bala Trazadora en acción</h4>
+<ul>
+<li>Issues <strong>#7</strong> (STT real), <strong>#4</strong> (LLM real), <strong>#10</strong> (TTS real):
+  se atacaron PRIMERO, antes que cualquier feature de UI</li>
+<li>El endpoint <code>POST /voice/turn</code> fue la bala trazadora:
+  <code>python
+  # apps/api/app/api/routes/voice.py — 14 líneas orquestando pipeline completo
+  @router.post("/turn", response_model=VoiceTurnResponse)
+  async def voice_turn(
+      payload: VoiceTurnRequest,
+      stt: STTService = Depends(get_stt_service),
+      llm: LLMService = Depends(get_llm_service),
+      tts: TTSService = Depends(get_tts_service),
+      store: ConversationStore = Depends(get_conversation_store),
+  ) -&gt; VoiceTurnResponse:
+      history = store.get_history(payload.session_id)
+      assistant_text = await llm.generate_reply(payload.utterance, history)
+      store.add_turn(payload.session_id, payload.utterance, assistant_text)
+      return VoiceTurnResponse(assistant_text=assistant_text, ...)</code></li>
+<li>Esto demostró que la arquitectura funcionaba y destrabó al resto del equipo</li>
+</ul>
+<h4 id="314-feedback-temprano-y-correccion-de-rumbo">31.4 Feedback temprano y corrección de rumbo</h4>
+<ul>
+<li>Los mocks permitieron desarrollo frontend en paralelo (el frontend
+  ni siquiera existía cuando se escribió el pipeline backend)</li>
+<li>El <code>deps.py</code> con provider-switching (mock ↔ real) permitió probar
+  sin APIs reales ni credenciales</li>
+</ul>
+<h4 id="315-conclusion">31.5 Conclusión</h4>
+<ul>
+<li>¿La bala trazadora cumplió su propósito?</li>
+<li>¿Qué aprendizaje dejó para futuros proyectos?</li>
+</ul>
+<hr />
+<h2 id="issue-32-doc-seccion-2-anatomia-de-la-complejidad-deep-vs-shallow-modules">Issue #32 — [DOC] Sección 2: Anatomía de la Complejidad (Deep vs Shallow Modules)</h2>
+<p><strong>Asignado:</strong> Estiven
+<strong>Archivo:</strong> <code>docs/02-deep-shallow-modules.md</code></p>
+<h3 id="objetivo_1">Objetivo</h3>
+<p>Analizar el código fuente usando la terminología exacta de Ousterhout.
+Identificar módulos profundos, módulos superficiales y fugas de información.</p>
+<h3 id="estructura-sugerida_1">Estructura sugerida</h3>
+<h4 id="321-introduccion">32.1 Introducción</h4>
+<ul>
+<li>Breve explicación de <em>deep module</em> vs <em>shallow module</em> según Ousterhout</li>
+<li>La proporción interfaz/implementación como métrica</li>
+</ul>
+<h4 id="322-modulos-profundos-deep-modules">32.2 Módulos Profundos (Deep Modules)</h4>
+<p>Buscar componentes con firma simple pero mucha complejidad oculta.</p>
+<p><strong>Candidato 1: STTService / LLMService / TTSService</strong></p>
+<pre><code class="language-python">class STTService(ABC):
+    @abstractmethod
+    async def transcribe(self, audio_bytes: bytes, filename: str = &quot;audio.wav&quot;) -&gt; str:
+        ...
+</code></pre>
+<ul>
+<li><strong>Firma:</strong> 1 método, 2 parámetros → extremadamente simple</li>
+<li><strong>Complejidad oculta:</strong> llamadas HTTP a OpenAI Whisper, manejo de formatos de audio,
+  autenticación, error handling, timeouts, encoding</li>
+<li><strong>Implementaciones:</strong> <code>MockSTTService</code> (~40 líneas), <code>OpenAIWhisperSTTService</code> (~60 líneas)</li>
+<li><strong>Ratio interfaz/implementación:</strong> ~1:10 → <strong>PROFUNDO</strong></li>
+<li>Incluir también <code>LLMService</code> y <code>TTSService</code> que siguen el mismo patrón</li>
+</ul>
+<p><strong>Candidato 2: ConversationStore → SQLiteConversationStore</strong></p>
+<pre><code class="language-python">class ConversationStore:
+    def create_session(self) -&gt; str: ...
+    def add_turn(self, session_id, user_text, assistant_text) -&gt; None: ...
+    def get_history(self, session_id) -&gt; list[dict]: ...
+</code></pre>
+<ul>
+<li><strong>Firma:</strong> 3 métodos, todos simples</li>
+<li><strong>Complejidad oculta:</strong> esquema SQLite con 2 tablas, conexiones, transacciones,
+  serialización ISO, manejo de sesiones expiradas</li>
+<li><strong>Implementaciones:</strong> <code>MemoryConversationStore</code> (30 líneas para tests),
+  <code>SQLiteConversationStore</code> (~110 líneas con schema DDL)</li>
+<li><strong>Ratio interfaz/implementación:</strong> ~1:40 → <strong>MUY PROFUNDO</strong></li>
+</ul>
+<p><strong>Candidato 3: <code>deps.py</code> — Provider Factory</strong></p>
+<pre><code class="language-python">def get_llm_service() -&gt; LLMService:
+    if settings.llm_provider == &quot;openai&quot;:
+        return OpenAILLMService(...)
+    return MockLLMService()
+</code></pre>
+<ul>
+<li>Oculta toda la lógica de selección de proveedor, configuración de API keys,
+  decisión de mock vs real</li>
+<li><strong>Profundidad:</strong> Media-alta</li>
+</ul>
+<h4 id="323-modulos-superficiales-shallow-modules">32.3 Módulos Superficiales (Shallow Modules)</h4>
+<p>Buscar archivos pequeños que requieren muchas llamadas entre sí.</p>
+<p><strong>Candidato 1: Estructura duplicada — dos arquitecturas conviviendo</strong>
+- <code>apps/api/routers/</code> vs <code>apps/api/app/api/routes/</code>
+- Ambas contienen los mismos endpoints (tasks, meetings, intent)
+- La versión flat importa de <code>services/</code> y <code>stores/</code> (estructura plana)
+- La versión anidada importa de <code>app/services/</code> y <code>app/db/</code> (estructura modular)
+- <strong>Problema:</strong> Coexistencia de dos filosofías de organización que obligan
+  al desarrollador a entender ambas para navegar el código
+- <strong>Solución:</strong> Elegir una (la anidada <code>app/</code> es más modular) y migrar</p>
+<p><strong>Candidato 2: Schemas planos individuales</strong>
+- <code>schemas/task_schema.py</code> (~34 líneas), <code>schemas/meeting_schema.py</code> (~32 líneas),
+  <code>schemas/intent_schema.py</code> (~17 líneas)
+- Cada uno es puro Pydantic — módulos extremadamente superficiales
+- Podrían unificarse en <code>app/schemas/</code> (que ya existe)
+- <strong>Solución:</strong> Consolidar tipos relacionados</p>
+<h4 id="324-fuga-de-informacion-information-leakage">32.4 Fuga de Información (Information Leakage)</h4>
+<p>Buscar si detalles internos de DB o red se filtraron a capas superiores.</p>
+<ul>
+<li>
+<p><strong>SQLite acoplado en memory.py:</strong>
+  <code>python
+  # apps/api/app/db/memory.py
+  from app.db.sqlite_store import ConversationStore, SQLiteConversationStore
+  _store = SQLiteConversationStore()</code>
+  Acá <code>memory.py</code> importa directamente <code>SQLiteConversationStore</code> en lugar
+  de usar una factory. Si querés cambiar a MongoDB, tenés que modificar
+  este archivo. Es una fuga de implementación leve.</p>
+</li>
+<li>
+<p><strong>ApiClient en frontend:</strong>
+  <code>typescript
+  // apps/web/src/services/apiClient.ts
+  // Clasifica errores como timeout | network | http | unknown
+  // BUEN AISLAMIENTO — el usuario nunca ve HTTP crudos</code>
+  El frontend hace buen ocultamiento. Los errores HTTP se transforman
+  a <code>ApiError</code> con tipos semánticos antes de llegar a la UI.</p>
+</li>
+<li>
+<p><strong>Analizar también:</strong> ¿Hay tipos de base de datos (UUIDs, timestamps ISO)
+  que se filtren a la UI? (Respuesta parcial: sí, los IDs UUID se muestran
+  en las respuestas — podrían ocultarse)</p>
+</li>
+</ul>
+<h4 id="325-conclusiones-y-recomendaciones">32.5 Conclusiones y recomendaciones</h4>
+<ul>
+<li>¿Qué módulos rescatar para próximos proyectos?</li>
+<li>¿La duplicación de estructuras fue error de coordinación o decisión consciente?</li>
+<li>Recomendación: consolidar a la estructura <code>app/</code> y eliminar la plana</li>
+</ul>
+<hr />
+<h2 id="issue-33-doc-seccion-3-el-veredicto-retrospectivo-de-los-sub-agentes">Issue #33 — [DOC] Sección 3: El Veredicto Retrospectivo de los Sub-Agentes</h2>
+<p><strong>Asignado:</strong> Nicolas
+<strong>Archivo:</strong> <code>docs/03-retrospective-verdict.md</code></p>
+<h3 id="objetivo_2">Objetivo</h3>
+<p>Analizar retrospectivamente cómo el debate arquitectónico impactó el desarrollo,
+y evaluar el "buen gusto arquitectónico" usando el concepto de Change Amplification.</p>
+<h3 id="estructura-sugerida_2">Estructura sugerida</h3>
+<h4 id="331-el-debate-arquitectonico">33.1 El debate arquitectónico</h4>
+<ul>
+<li>Recuperar los hallazgos de la skill <code>improve-codebase-architecture</code>
+  (archivos que estuvieron en <code>.agents/skills/improve-codebase-architecture/</code>)</li>
+<li>Explicar qué recomendaron los sub-agentes paralelos</li>
+<li>¿Se implementaron esas recomendaciones? ¿Por qué sí o por qué no?</li>
+</ul>
+<h4 id="332-impacto-en-la-velocidad-de-desarrollo">33.2 Impacto en la velocidad de desarrollo</h4>
+<ul>
+<li>¿El debate arquitectónico ralentizó la segunda mitad del proyecto o la aceleró?</li>
+<li>Evidencia: comparar fechas entre <code>ralph/progress.txt</code> y <code>ralph/progress_track.txt</code>
+  — ver si después del análisis hubo más o menos velocidad</li>
+</ul>
+<h4 id="333-change-amplification">33.3 Change Amplification</h4>
+<p>Cuando llegaron features tardíos (FE-5.1, FE-5.2, FE-5.3),
+¿cuántos archivos hubo que tocar?</p>
+<p><strong>Ejemplo concreto — QuickCommand (FE-5.3):</strong></p>
+<pre><code>Archivos NUEVOS:   1 (QuickCommand.tsx)
+Archivos MOFICADOS: 3 (useRecorderUI.ts, apiClient.ts, page.tsx)
+Total:             4 archivos para voice → tasks integration
+</code></pre>
+<p>Según Ousterhout, el "buen gusto arquitectónico" minimiza los archivos
+que hay que tocar para agregar una feature. 4 archivos para una integración
+completa (voz → intención → acción → refresco de UI) es razonable.</p>
+<p><strong>Probar elasticidad con otro escenario:</strong>
+- ¿Agregar un nuevo provider de STT (ej: Google Speech-to-Text)?
+  1. Crear <code>GoogleSTTService</code> implementando <code>STTService</code>
+  2. Agregar un <code>elif</code> en <code>deps.py</code>
+  → <strong>Solo 2 archivos.</strong> Eso es buen diseño — el módulo es profundo y extensible.</p>
+<h4 id="334-conclusion">33.4 Conclusión</h4>
+<ul>
+<li>¿La arquitectura aguantó bien los últimos features? (Sí, evidencia: QuickCommand)</li>
+<li>¿Qué se haría diferente si empezaran de nuevo?</li>
+<li>Nota final sobre co-creación humano-máquina</li>
+</ul>
+<hr />
+<h2 id="issue-34-infra-e2e-final-y-lanzamiento-del-sitio">Issue #34 — [INFRA] E2E final y lanzamiento del sitio</h2>
+<p><strong>Asignado:</strong> Kevin</p>
+<h3 id="tareas_1">Tareas</h3>
+<h4 id="341-verificar-e2e">34.1 Verificar E2E</h4>
+<ul>
+<li>Backend: <code>python -m pytest apps/api/tests/ -v</code> → todos verdes</li>
+<li>Frontend: <code>pnpm -C apps/web test</code> → todos verdes</li>
+<li>Build frontend: <code>pnpm -C apps/web build</code> → sin errores</li>
+</ul>
+<h4 id="342-ultimo-build-de-mkdocs">34.2 Último build de MkDocs</h4>
+<pre><code class="language-bash">mkdocs build --strict
+# Sin warnings ni errores
+</code></pre>
+<h4 id="343-verificar-deploy-del-docs-site">34.3 Verificar deploy del docs site</h4>
+<ul>
+<li>Pushear a main para triggerear GitHub Actions</li>
+<li>O bien correr <code>mkdocs gh-deploy --force</code></li>
+<li>Verificar que https://nickgv.github.io/netvocal/ carga las 3 secciones</li>
+</ul>
+<h4 id="344-release-tag">34.4 Release tag</h4>
+<pre><code class="language-bash">git tag v1.0.0 -m &quot;Entrega Final Tarea 3 - Software Journey&quot;
+git push --tags
+</code></pre>
+<h4 id="345-registrar-urls-de-entrega">34.5 Registrar URLs de entrega</h4>
+<ul>
+<li><strong>URL del repo:</strong> <code>https://github.com/NickGV/netvocal</code></li>
+<li><strong>URL del docs site:</strong> la que genere GitHub Pages (generalmente
+  <code>https://nickgv.github.io/netvocal/</code>)</li>
+</ul>
+<hr />
+<h2 id="issue-35-doc-integracion-y-revision-cruzada">Issue #35 — [DOC] Integración y revisión cruzada</h2>
+<p><strong>Asignado:</strong> Nicolas (como lead)</p>
+<h3 id="tareas_2">Tareas</h3>
+<h4 id="351-revisar-y-unificar-tono">35.1 Revisar y unificar tono</h4>
+<ul>
+<li>Las 3 secciones deben leerse como un documento cohesivo</li>
+<li>Citas consistentes a Ousterhout (capítulos, terminología exacta)</li>
+<li>Misma nomenclatura técnica en todo el sitio</li>
+</ul>
+<h4 id="352-completar-docsindexmd">35.2 Completar <code>docs/index.md</code></h4>
+<ul>
+<li>Resumen ejecutivo del proyecto</li>
+<li>Links a las 3 secciones</li>
+<li>Tabla del equipo</li>
+<li>Screenshot del assistant funcionando (opcional pero recomendado)</li>
+</ul>
+<h4 id="353-verificar-navegacion-mkdocs">35.3 Verificar navegación MkDocs</h4>
+<ul>
+<li>Sidebar con las 3 secciones</li>
+<li>Enlaces funcionando</li>
+<li><code>mkdocs build --strict</code> sin errores</li>
+</ul>
+<h4 id="354-armado-final">35.4 Armado final</h4>
+<pre><code class="language-bash">git add .
+git commit -m &quot;docs: complete Software Journey site v1.0&quot;
+git push
+</code></pre>
+<h4 id="355-verificar-deploy">35.5 Verificar deploy</h4>
+<ul>
+<li>El sitio debe estar públicamente accesible</li>
+<li>Navegar las 3 secciones sin errores 404</li>
+</ul>
+<hr />
+<h2 id="-_1">---</h2>
+<h2 id="timeline-sugerido-3-4-dias">Timeline Sugerido (3-4 días)</h2>
+<table>
+<thead>
+<tr>
+<th>Día</th>
+<th>Kevin</th>
+<th>Elber</th>
+<th>Estiven</th>
+<th>Nicolas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1</strong></td>
+<td>#30: setup MkDocs + tests</td>
+<td>#31: investigar Ralph + pipeline</td>
+<td>#32: explorar código y tomar snippets</td>
+<td>#33: recopilar architecture debates</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>#30: GitHub Actions deploy</td>
+<td>#31: escribir sección completa</td>
+<td>#32: escribir sección completa</td>
+<td>#33: escribir sección completa</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>#34: E2E + release</td>
+<td>Revisar sección de Estiven</td>
+<td>Revisar sección de Elber</td>
+<td>#35: integrar + index</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>Fixes si hay</td>
+<td>Fixes si hay</td>
+<td>Fixes si hay</td>
+<td>Deploy final</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="-_2">---</h2>
+<h2 id="checklist-final-de-la-entrega">Checklist final de la entrega</h2>
+<ul>
+<li>[ ] Branch <code>developkevin</code> eliminada del remoto</li>
+<li>[ ] Backend tests: todos pasando (<code>pytest -v</code>)</li>
+<li>[ ] Frontend tests: todos pasando (<code>pnpm -C apps/web test</code>)</li>
+<li>[ ] MkDocs instalado y <code>mkdocs.yml</code> configurado</li>
+<li>[ ] <code>docs/index.md</code> con resumen ejecutivo</li>
+<li>[ ] <code>docs/01-tracer-bullet.md</code> completo</li>
+<li>[ ] <code>docs/02-deep-shallow-modules.md</code> completo</li>
+<li>[ ] <code>docs/03-retrospective-verdict.md</code> completo</li>
+<li>[ ] GitHub Actions deploya el site automáticamente</li>
+<li>[ ] Sitio desplegado y accesible públicamente</li>
+<li>[ ] Tag <code>v1.0.0</code> creado</li>
+<li>[ ] URLs de entrega listas (repo + docs site)</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
