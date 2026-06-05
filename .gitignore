@@ -32,3 +32,10 @@ __pycache__/
 venv/
 dist/
 build/
+
+# Database
+*.db
+*.sqlite3
+
+# MkDocs build output
+site/
