@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#deep-vs-shallow-modules" class="md-skip">
+        <a href="#anatomia-de-la-complejidad-deep-vs-shallow-modules-en-netvocal" class="md-skip">
           Skip to content
         </a>
       
@@ -431,44 +431,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modulos-profundos-deep-modules" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Módulos Profundos (Deep Modules)
+        Introducción
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Módulos Profundos (Deep Modules)">
+    <nav class="md-nav" aria-label="Introducción">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sttservice-llmservice-ttsservice" class="md-nav__link">
+  <a href="#conceptos-clave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        STTService / LLMService / TTSService
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conversationstore-sqliteconversationstore" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ConversationStore → SQLiteConversationStore
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#depspy-provider-factory" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        deps.py — Provider Factory
+        Conceptos Clave
       
     </span>
   </a>
@@ -481,22 +459,34 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modulos-superficiales-shallow-modules" class="md-nav__link">
+  <a href="#1-deep-modules-core-abstractions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Módulos Superficiales (Shallow Modules)
+        1. Deep Modules: Core Abstractions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Módulos Superficiales (Shallow Modules)">
+    <nav class="md-nav" aria-label="1. Deep Modules: Core Abstractions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#duplicacion-de-estructura-de-rutas" class="md-nav__link">
+  <a href="#11-sttservice-llmservice-ttsservice-provider-abstraction-layer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Duplicación de estructura de rutas
+        1.1 STTService / LLMService / TTSService (Provider Abstraction Layer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 STTService / LLMService / TTSService (Provider Abstraction Layer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-deep-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: DEEP MODULE
       
     </span>
   </a>
@@ -504,10 +494,449 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schemas-planos-individuales" class="md-nav__link">
+  <a href="#por-que-es-deep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schemas planos individuales
+        Por Qué Es Deep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patron-de-inyeccion-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrón de Inyección de Dependencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-arquitectonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto Arquitectónico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-conversationstore-sqliteconversationstore-persistent-storage-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 ConversationStore / SQLiteConversationStore (Persistent Storage Abstraction)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 ConversationStore / SQLiteConversationStore (Persistent Storage Abstraction)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-deep-module_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: DEEP MODULE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-es-deep_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Es Deep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patron-de-abstraccion-con-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrón de Abstracción con Memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-en-rutas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso en Rutas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-provider-factory-depspy-deep-module-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Provider Factory (deps.py) — Deep Module Composition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Provider Factory (deps.py) — Deep Module Composition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-semi-deep-module-enfoque-composicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SEMI-DEEP MODULE (enfoque composicional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-contribuye-a-profundidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Contribuye a Profundidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#potencial-debil-escalabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Potencial Débil: Escalabilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-shallow-modules-problemas-arquitectonicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Shallow Modules: Problemas Arquitectónicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Shallow Modules: Problemas Arquitectónicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-duplicacion-de-arquitecturas-routers-vs-appapiroutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Duplicación de Arquitecturas (routers/ vs app/api/routes/)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Duplicación de Arquitecturas (routers/ vs app/api/routes/)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-shallow-pattern-information-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SHALLOW PATTERN — Information Leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacion-taskspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparación: tasks.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-negativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto Negativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-probable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Probable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluación Técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fragmentacion-de-schemas-shallow-module-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Fragmentación de Schemas — Shallow Module Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Fragmentación de Schemas — Shallow Module Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-shallow-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SHALLOW MODULES
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-task_schemapy-vs-taskspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis: task_schema.py vs tasks.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-son-shallow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Son Shallow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#carga-cognitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carga Cognitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-information-leakage-exposicion-de-detalles-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Information Leakage: Exposición de Detalles SQLite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Information Leakage: Exposición de Detalles SQLite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-partial-information-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: PARTIAL INFORMATION LEAKAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#riesgo-arquitectonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riesgo Arquitectónico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-analisis-de-errores-y-fronteras-de-modulos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Análisis de Errores y Fronteras de Módulos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Análisis de Errores y Fronteras de Módulos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-error-handling-informacion-sensible-en-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Error Handling — Información Sensible en Respuestas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Error Handling — Información Sensible en Respuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-selective-information-hiding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SELECTIVE INFORMATION HIDING
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-timestamps-e-ids-en-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Timestamps e IDs en Responses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Timestamps e IDs en Responses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-patrones-positivos-abstracciones-sostenibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Patrones Positivos — Abstracciones Sostenibles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Patrones Positivos — Abstracciones Sostenibles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-inyeccion-de-dependencias-en-rutas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Inyección de Dependencias en Rutas
       
     </span>
   </a>
@@ -520,10 +949,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fuga-de-informacion-information-leakage" class="md-nav__link">
+  <a href="#5-evaluacion-de-complejidad-cognitiva-por-modulo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fuga de Información (Information Leakage)
+        5. Evaluación de Complejidad Cognitiva por Módulo
       
     </span>
   </a>
@@ -531,13 +960,146 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recomendaciones" class="md-nav__link">
+  <a href="#6-recomendaciones-arquitectonicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recomendaciones
+        6. Recomendaciones Arquitectónicas
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="6. Recomendaciones Arquitectónicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-consolidar-arquitecturas-deprecar-routers-a-favor-de-appapiroutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Consolidar Arquitecturas: Deprecar routers/ a favor de app/api/routes/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-consolidar-schemas-unificar-validaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Consolidar Schemas: Unificar Validaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-aplicar-factory-pattern-a-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Aplicar Factory Pattern a Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-estandarizar-asyncawait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Estandarizar Async/Await
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-impacto-de-coautoria-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Impacto de Coautoría con IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Conclusiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Conclusiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulos-deep-sostenibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos Deep (Sostenibles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-shallow-requieren-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos Shallow (Requieren Atención)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#information-leakage-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information Leakage Identificado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones-prioritarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones Prioritarias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reflexion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión Final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -603,44 +1165,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modulos-profundos-deep-modules" class="md-nav__link">
+  <a href="#introduccion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Módulos Profundos (Deep Modules)
+        Introducción
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Módulos Profundos (Deep Modules)">
+    <nav class="md-nav" aria-label="Introducción">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sttservice-llmservice-ttsservice" class="md-nav__link">
+  <a href="#conceptos-clave" class="md-nav__link">
     <span class="md-ellipsis">
       
-        STTService / LLMService / TTSService
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conversationstore-sqliteconversationstore" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ConversationStore → SQLiteConversationStore
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#depspy-provider-factory" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        deps.py — Provider Factory
+        Conceptos Clave
       
     </span>
   </a>
@@ -653,22 +1193,34 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#modulos-superficiales-shallow-modules" class="md-nav__link">
+  <a href="#1-deep-modules-core-abstractions" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Módulos Superficiales (Shallow Modules)
+        1. Deep Modules: Core Abstractions
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Módulos Superficiales (Shallow Modules)">
+    <nav class="md-nav" aria-label="1. Deep Modules: Core Abstractions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#duplicacion-de-estructura-de-rutas" class="md-nav__link">
+  <a href="#11-sttservice-llmservice-ttsservice-provider-abstraction-layer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Duplicación de estructura de rutas
+        1.1 STTService / LLMService / TTSService (Provider Abstraction Layer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 STTService / LLMService / TTSService (Provider Abstraction Layer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-deep-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: DEEP MODULE
       
     </span>
   </a>
@@ -676,10 +1228,449 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schemas-planos-individuales" class="md-nav__link">
+  <a href="#por-que-es-deep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Schemas planos individuales
+        Por Qué Es Deep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patron-de-inyeccion-de-dependencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrón de Inyección de Dependencias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-arquitectonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto Arquitectónico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-conversationstore-sqliteconversationstore-persistent-storage-abstraction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 ConversationStore / SQLiteConversationStore (Persistent Storage Abstraction)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 ConversationStore / SQLiteConversationStore (Persistent Storage Abstraction)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-deep-module_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: DEEP MODULE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-es-deep_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Es Deep
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#patron-de-abstraccion-con-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Patrón de Abstracción con Memoria
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uso-en-rutas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uso en Rutas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-provider-factory-depspy-deep-module-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Provider Factory (deps.py) — Deep Module Composition
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Provider Factory (deps.py) — Deep Module Composition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-semi-deep-module-enfoque-composicional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SEMI-DEEP MODULE (enfoque composicional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-contribuye-a-profundidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Contribuye a Profundidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#potencial-debil-escalabilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Potencial Débil: Escalabilidad
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-shallow-modules-problemas-arquitectonicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Shallow Modules: Problemas Arquitectónicos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Shallow Modules: Problemas Arquitectónicos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-duplicacion-de-arquitecturas-routers-vs-appapiroutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Duplicación de Arquitecturas (routers/ vs app/api/routes/)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 Duplicación de Arquitecturas (routers/ vs app/api/routes/)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-shallow-pattern-information-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SHALLOW PATTERN — Information Leakage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#comparacion-taskspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Comparación: tasks.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#impacto-negativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Impacto Negativo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#causa-probable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Causa Probable
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#evaluacion-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Evaluación Técnica
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-fragmentacion-de-schemas-shallow-module-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Fragmentación de Schemas — Shallow Module Problem
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Fragmentación de Schemas — Shallow Module Problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-shallow-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SHALLOW MODULES
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis-task_schemapy-vs-taskspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis: task_schema.py vs tasks.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-son-shallow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por Qué Son Shallow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#carga-cognitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Carga Cognitiva
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-information-leakage-exposicion-de-detalles-sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Information Leakage: Exposición de Detalles SQLite
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Information Leakage: Exposición de Detalles SQLite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-partial-information-leakage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: PARTIAL INFORMATION LEAKAGE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analisis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#riesgo-arquitectonico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Riesgo Arquitectónico
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-analisis-de-errores-y-fronteras-de-modulos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Análisis de Errores y Fronteras de Módulos
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Análisis de Errores y Fronteras de Módulos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-error-handling-informacion-sensible-en-respuestas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Error Handling — Información Sensible en Respuestas
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 Error Handling — Información Sensible en Respuestas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#caracterizacion-selective-information-hiding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Caracterización: SELECTIVE INFORMATION HIDING
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-timestamps-e-ids-en-responses" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Timestamps e IDs en Responses
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Timestamps e IDs en Responses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#analisis_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Análisis
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-patrones-positivos-abstracciones-sostenibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Patrones Positivos — Abstracciones Sostenibles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Patrones Positivos — Abstracciones Sostenibles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-inyeccion-de-dependencias-en-rutas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Inyección de Dependencias en Rutas
       
     </span>
   </a>
@@ -692,10 +1683,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#fuga-de-informacion-information-leakage" class="md-nav__link">
+  <a href="#5-evaluacion-de-complejidad-cognitiva-por-modulo" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Fuga de Información (Information Leakage)
+        5. Evaluación de Complejidad Cognitiva por Módulo
       
     </span>
   </a>
@@ -703,13 +1694,146 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#recomendaciones" class="md-nav__link">
+  <a href="#6-recomendaciones-arquitectonicas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Recomendaciones
+        6. Recomendaciones Arquitectónicas
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="6. Recomendaciones Arquitectónicas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-consolidar-arquitecturas-deprecar-routers-a-favor-de-appapiroutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Consolidar Arquitecturas: Deprecar routers/ a favor de app/api/routes/
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-consolidar-schemas-unificar-validaciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Consolidar Schemas: Unificar Validaciones
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-aplicar-factory-pattern-a-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 Aplicar Factory Pattern a Storage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-estandarizar-asyncawait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 Estandarizar Async/Await
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-impacto-de-coautoria-con-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Impacto de Coautoría con IA
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-conclusiones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Conclusiones
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Conclusiones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modulos-deep-sostenibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos Deep (Sostenibles)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#modulos-shallow-requieren-atencion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Módulos Shallow (Requieren Atención)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#information-leakage-identificado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Information Leakage Identificado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recomendaciones-prioritarias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recomendaciones Prioritarias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reflexion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reflexión Final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -733,45 +1857,622 @@
   
 
 
-<h1 id="deep-vs-shallow-modules">Deep vs Shallow Modules</h1>
-<h2 id="modulos-profundos-deep-modules">Módulos Profundos (Deep Modules)</h2>
-<h3 id="sttservice-llmservice-ttsservice">STTService / LLMService / TTSService</h3>
-<p>Interfaz extremadamente simple (1 método, 2 parámetros) que oculta complejidad significativa: llamadas HTTP a APIs externas, manejo de formatos, autenticación y timeouts.</p>
-<pre><code class="language-python">class LLMService(ABC):
+<h1 id="anatomia-de-la-complejidad-deep-vs-shallow-modules-en-netvocal">Anatomía de la Complejidad: Deep vs Shallow Modules en NETVOCAL</h1>
+<h2 id="introduccion">Introducción</h2>
+<p>Este análisis aplica los principios arquitectónicos de John Ousterhout (A Philosophy of Software Design) para evaluar la estructura del proyecto NETVOCAL. El objetivo es caracterizar los módulos como <strong>deep</strong> o <strong>shallow</strong> según la relación entre interfaz pública e implementación interna, identificar casos de <strong>information leakage</strong> y evaluar el impacto en la complejidad cognitiva del sistema.</p>
+<h3 id="conceptos-clave">Conceptos Clave</h3>
+<p><strong>Deep Module</strong>: La interfaz oculta significativa complejidad tras una abstracción simple. El esfuerzo invertido en implementación es sustancialmente mayor que el necesario para entender y usar la interfaz.</p>
+<p><strong>Shallow Module</strong>: La interfaz expone la complejidad subyacente sin abstraerla. El costo cognitivo de usar el módulo es comparable al esfuerzo de implementación, violando el principio de ocultamiento de información.</p>
+<p><strong>Information Leakage</strong>: Cuando detalles de implementación de un módulo A filtran a los consumidores de A, obligándolos a entender y adaptarse a esos detalles internos.</p>
+<hr />
+<h2 id="1-deep-modules-core-abstractions">1. Deep Modules: Core Abstractions</h2>
+<h3 id="11-sttservice-llmservice-ttsservice-provider-abstraction-layer">1.1 STTService / LLMService / TTSService (Provider Abstraction Layer)</h3>
+<h4 id="caracterizacion-deep-module">Caracterización: <strong>DEEP MODULE</strong></h4>
+<p>Las interfaces base de los servicios de IA representan abstracciones profundas por excelencia.</p>
+<p><strong>Interfaz:</strong></p>
+<pre><code class="language-python"># apps/api/app/services/stt/base.py
+class STTService(ABC):
     @abstractmethod
-    async def generate_reply(self, user_text: str,
-                             conversation_history: list[dict] | None = None) -&gt; str: ...
+    async def transcribe(self, audio_bytes: bytes, filename: str = &quot;audio.wav&quot;) -&gt; str:
+        raise NotImplementedError
 </code></pre>
-<p>Ratio interfaz/implementación excepcionalmente alto.</p>
-<h3 id="conversationstore-sqliteconversationstore">ConversationStore → SQLiteConversationStore</h3>
-<p>3 métodos simples (<code>create_session</code>, <code>add_turn</code>, <code>get_history</code>) que ocultan esquema SQLite, conexiones, transacciones y serialización:</p>
-<pre><code class="language-python">class ConversationStore(ABC):
+<pre><code class="language-python"># apps/api/app/services/llm/base.py
+class LLMService(ABC):
     @abstractmethod
-    def get_history(self, session_id: str) -&gt; list[dict]: ...
+    async def generate_reply(self, user_text: str, conversation_history: list[dict] | None = None) -&gt; str:
+        raise NotImplementedError
 </code></pre>
-<h3 id="depspy-provider-factory">deps.py — Provider Factory</h3>
-<p>Oculta la lógica de selección de proveedor y configuración detrás de funciones simples:</p>
-<pre><code class="language-python">def get_stt_service() -&gt; STTService: ...
-def get_llm_service() -&gt; LLMService: ...
-def get_tts_service() -&gt; TTSService: ...
+<pre><code class="language-python"># apps/api/app/services/tts/base.py
+class TTSService(ABC):
+    @abstractmethod
+    async def synthesize(self, text: str) -&gt; bytes:
+        raise NotImplementedError
 </code></pre>
-<h2 id="modulos-superficiales-shallow-modules">Módulos Superficiales (Shallow Modules)</h2>
-<h3 id="duplicacion-de-estructura-de-rutas">Duplicación de estructura de rutas</h3>
-<p>Conviven dos estructuras con los mismos endpoints:
-- <code>apps/api/routers/</code> (plana, sin <code>__init__.py</code>)
-- <code>apps/api/app/api/routes/</code> (anidada, con <code>__init__.py</code>)</p>
-<p>Esto crea confusión sobre qué módulo importar y duplica mantenimiento. Se recomienda consolidar en la estructura anidada <code>app/</code>.</p>
-<h3 id="schemas-planos-individuales">Schemas planos individuales</h3>
-<p>Archivos como <code>apps/api/schemas/task_schema.py</code> contienen una sola clase Pydantic. Son módulos extremadamente superficiales que podrían unificarse.</p>
-<h2 id="fuga-de-informacion-information-leakage">Fuga de Información (Information Leakage)</h2>
-<p>En <code>app/db/memory.py</code>, el módulo importa directamente <code>SQLiteConversationStore</code> en vez de usar una factory, filtrando detalles de implementación a capas superiores.</p>
-<h2 id="recomendaciones">Recomendaciones</h2>
+<p><strong>Implementación (Ejemplo: OpenAI Whisper STT):</strong></p>
+<pre><code class="language-python"># apps/api/app/services/stt/openai.py
+class OpenAIWhisperSTTService(STTService):
+    def __init__(self, api_key: str, model: str = &quot;whisper-1&quot;) -&gt; None:
+        self._client = AsyncOpenAI(api_key=api_key)
+        self._model = model
+
+    async def transcribe(self, audio_bytes: bytes, filename: str = &quot;audio.wav&quot;) -&gt; str:
+        transcript = await self._client.audio.transcriptions.create(
+            model=self._model,
+            file=(filename, audio_bytes),
+        )
+        return transcript.text
+</code></pre>
+<h4 id="por-que-es-deep">Por Qué Es Deep</h4>
+<ol>
+<li><strong>Ocultamiento de Complejidad Externa</strong>: La interfaz oculta completamente la interacción con OpenAI API:</li>
+<li>Gestión de conexiones asincrónicas (<code>AsyncOpenAI</code>)</li>
+<li>Manejo de rate limiting implícito</li>
+<li>Serialización de audio para transmisión HTTP</li>
+<li>
+<p>Parseo de respuestas JSON de OpenAI</p>
+</li>
+<li>
+<p><strong>Simplicidad de Contrato</strong>: El consumidor solo necesita pasar <code>bytes</code> y recibir <code>str</code>. No requiere entender:</p>
+</li>
+<li>OAuth/API keys (manejado en <code>__init__</code>)</li>
+<li>Serialización multipart/form-data</li>
+<li>
+<p>Formato específico del endpoint <code>/audio/transcriptions</code></p>
+</li>
+<li>
+<p><strong>Cambio Amplificado Invisible</strong>: Si migramos de OpenAI Whisper a Google Cloud Speech-to-Text, solo <code>apps/api/app/services/stt/openai.py</code> cambia. El resto del sistema permanece intacto.</p>
+</li>
+</ol>
+<h4 id="patron-de-inyeccion-de-dependencias">Patrón de Inyección de Dependencias</h4>
+<pre><code class="language-python"># apps/api/app/core/deps.py
+def get_stt_service() -&gt; STTService:
+    settings = Settings()
+    if settings.stt_provider == &quot;openai&quot;:
+        return OpenAIWhisperSTTService(
+            api_key=settings.openai_api_key,
+            model=settings.whisper_model,
+        )
+    return MockSTTService()
+</code></pre>
+<p>El factory pattern centraliza la lógica de switching entre providers. Este es un caso de <strong>deep module composition</strong>: la complejidad de seleccionar e inicializar providers se encapsula en una única ubicación.</p>
+<h4 id="impacto-arquitectonico">Impacto Arquitectónico</h4>
 <ul>
-<li>Mantener el diseño profundo de los servicios base (STT, LLM, TTS)</li>
-<li>Consolidar la duplicación de rutas a una sola estructura</li>
-<li>Unificar schemas pequeños en archivos más cohesivos</li>
-<li>Usar factories para el store en vez de imports directos</li>
+<li><strong>Bajo acoplamiento</strong>: Rutas HTTP dependen solo de abstracciones base, no de implementaciones concretas</li>
+<li><strong>Testabilidad</strong>: Switching a <code>MockSTTService</code> para tests es trivial</li>
+<li><strong>Extensibilidad</strong>: Agregar un nuevo provider (e.g., Google Cloud) requiere crear solo <code>GoogleCloudSTTService</code> e incluirlo en <code>deps.py</code></li>
 </ul>
+<hr />
+<h3 id="12-conversationstore-sqliteconversationstore-persistent-storage-abstraction">1.2 ConversationStore / SQLiteConversationStore (Persistent Storage Abstraction)</h3>
+<h4 id="caracterizacion-deep-module_1">Caracterización: <strong>DEEP MODULE</strong></h4>
+<p>La capa de persistencia es profunda porque oculta complejidad significativa de base de datos tras una interfaz simple.</p>
+<p><strong>Interfaz Abstracta:</strong></p>
+<pre><code class="language-python"># apps/api/app/db/sqlite_store.py
+class ConversationStore:
+    &quot;&quot;&quot;Abstract interface for conversation storage.&quot;&quot;&quot;
+
+    def create_session(self) -&gt; str:
+        raise NotImplementedError
+
+    def add_turn(self, session_id: str, user_text: str, assistant_text: str) -&gt; None:
+        raise NotImplementedError
+
+    def get_history(self, session_id: str) -&gt; list[dict]:
+        raise NotImplementedError
+</code></pre>
+<p><strong>Implementación Concreta (SQLite):</strong></p>
+<pre><code class="language-python"># apps/api/app/db/sqlite_store.py (excerpt)
+class SQLiteConversationStore(ConversationStore):
+    def _init_db(self) -&gt; None:
+        &quot;&quot;&quot;Initialize database schema if not exists.&quot;&quot;&quot;
+        conn = self._get_connection()
+        cursor = conn.cursor()
+        cursor.execute(&quot;&quot;&quot;
+            CREATE TABLE IF NOT EXISTS conversations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id TEXT UNIQUE NOT NULL,
+                created_at TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+        &quot;&quot;&quot;)
+        cursor.execute(&quot;&quot;&quot;
+            CREATE TABLE IF NOT EXISTS turns (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                session_id TEXT NOT NULL,
+                role TEXT NOT NULL,
+                text TEXT NOT NULL,
+                timestamp TEXT NOT NULL,
+                FOREIGN KEY (session_id) REFERENCES conversations(session_id)
+                    ON DELETE CASCADE
+            )
+        &quot;&quot;&quot;)
+        cursor.execute(
+            &quot;CREATE INDEX IF NOT EXISTS idx_turns_session_id ON turns(session_id)&quot;
+        )
+        conn.commit()
+
+    def add_turn(self, session_id: str, user_text: str, assistant_text: str) -&gt; None:
+        now = datetime.now(UTC).isoformat()
+        conn = self._get_connection()
+        cursor = conn.cursor()
+
+        # Ensure session exists
+        cursor.execute(
+            &quot;SELECT session_id FROM conversations WHERE session_id = ?&quot;,
+            (session_id,)
+        )
+        if cursor.fetchone() is None:
+            cursor.execute(
+                &quot;INSERT INTO conversations (session_id, created_at, updated_at) VALUES (?, ?, ?)&quot;,
+                (session_id, now, now)
+            )
+
+        # Add user and assistant turns with transaction semantics
+        cursor.execute(
+            &quot;INSERT INTO turns (session_id, role, text, timestamp) VALUES (?, ?, ?, ?)&quot;,
+            (session_id, &quot;user&quot;, user_text, now)
+        )
+        cursor.execute(
+            &quot;INSERT INTO turns (session_id, role, text, timestamp) VALUES (?, ?, ?, ?)&quot;,
+            (session_id, &quot;assistant&quot;, assistant_text, now)
+        )
+        cursor.execute(
+            &quot;UPDATE conversations SET updated_at = ? WHERE session_id = ?&quot;,
+            (now, session_id)
+        )
+        conn.commit()
+</code></pre>
+<h4 id="por-que-es-deep_1">Por Qué Es Deep</h4>
+<ol>
+<li><strong>Complejidad Oculta</strong>:</li>
+<li>Gestión de conexiones SQLite (pooling, thread-safety via <code>check_same_thread=False</code>)</li>
+<li>Schema con relaciones (foreign keys, cascade delete)</li>
+<li>Transacciones implícitas (llamadas a <code>commit()</code>)</li>
+<li>
+<p>Indexes para optimización de queries</p>
+</li>
+<li>
+<p><strong>Interfaz Minimalista</strong>: El consumidor solo:
+   <code>python
+   store.add_turn(session_id, "hola", "¿qué tal?")
+   history = store.get_history(session_id)</code></p>
+</li>
+<li>
+<p><strong>Invariantes Encapsuladas</strong>: </p>
+</li>
+<li>Validación de referencias (existe session_id)</li>
+<li>Atomicidad: usuario + asistente siempre se escriben juntos</li>
+<li>Timestamp sincronizado en UTC</li>
+<li>Ordenamiento implícito por <code>id ASC</code> al recuperar</li>
+</ol>
+<h4 id="patron-de-abstraccion-con-memoria">Patrón de Abstracción con Memoria</h4>
+<pre><code class="language-python"># apps/api/app/db/sqlite_store.py
+class MemoryConversationStore(ConversationStore):
+    &quot;&quot;&quot;In-memory implementation for testing.&quot;&quot;&quot;
+
+    def __init__(self) -&gt; None:
+        self._store: dict[str, list[dict]] = {}
+
+    def create_session(self) -&gt; str:
+        session_id = uuid4().hex[:12]
+        self._store[session_id] = []
+        return session_id
+</code></pre>
+<p>La existencia de <code>MemoryConversationStore</code> demuestra que la abstracción es <strong>suficientemente profunda</strong>: puede tener múltiples implementaciones sin que los consumidores lo noten.</p>
+<h4 id="uso-en-rutas">Uso en Rutas</h4>
+<pre><code class="language-python"># apps/api/app/api/routes/voice.py
+@router.post(&quot;/turn&quot;, response_model=VoiceTurnResponse)
+async def voice_turn(
+    payload: VoiceTurnRequest,
+    store: ConversationStore = Depends(get_conversation_store),
+) -&gt; VoiceTurnResponse:
+    session_id = payload.session_id or store.create_session()
+    history = store.get_history(session_id)
+    assistant_text = await llm.generate_reply(payload.utterance, conversation_history=history)
+    store.add_turn(session_id, payload.utterance, assistant_text)
+    return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)
+</code></pre>
+<p>La ruta no sabe si está usando SQLite o memoria. Este es <strong>information hiding genuino</strong>.</p>
+<hr />
+<h3 id="13-provider-factory-depspy-deep-module-composition">1.3 Provider Factory (deps.py) — Deep Module Composition</h3>
+<h4 id="caracterizacion-semi-deep-module-enfoque-composicional">Caracterización: <strong>SEMI-DEEP MODULE</strong> (enfoque composicional)</h4>
+<pre><code class="language-python"># apps/api/app/core/deps.py
+def get_stt_service() -&gt; STTService:
+    settings = Settings()
+    if settings.stt_provider == &quot;openai&quot;:
+        return OpenAIWhisperSTTService(
+            api_key=settings.openai_api_key,
+            model=settings.whisper_model,
+        )
+    return MockSTTService()
+</code></pre>
+<h4 id="por-que-contribuye-a-profundidad">Por Qué Contribuye a Profundidad</h4>
+<ol>
+<li><strong>Centralización de Decisiones</strong>: La lógica de "qué provider usar" está en <strong>un solo lugar</strong></li>
+<li><strong>Configuración Basada en Entorno</strong>: Extrae decisiones del código hacia <code>.env</code> variables</li>
+<li><strong>Aislamiento de Switching</strong>: Si añadimos 10 nuevos providers, solo <code>deps.py</code> crece</li>
+</ol>
+<h4 id="potencial-debil-escalabilidad">Potencial Débil: Escalabilidad</h4>
+<p>Si el proyecto creciera significativamente, podrían existir múltiples factories o DI containers más sofisticados. Por ahora, la simplicidad es una fortaleza.</p>
+<hr />
+<h2 id="2-shallow-modules-problemas-arquitectonicos">2. Shallow Modules: Problemas Arquitectónicos</h2>
+<h3 id="21-duplicacion-de-arquitecturas-routers-vs-appapiroutes">2.1 Duplicación de Arquitecturas (routers/ vs app/api/routes/)</h3>
+<h4 id="caracterizacion-shallow-pattern-information-leakage">Caracterización: <strong>SHALLOW PATTERN — Information Leakage</strong></h4>
+<p>Existen dos estructuras de routing paralelas:</p>
+<p><strong>Arquitectura 1 (apps/api/routers/):</strong></p>
+<pre><code>apps/api/
+├── routers/
+│   ├── tasks.py
+│   ├── meetings.py
+│   └── intent.py
+├── services/
+│   ├── task_service.py
+│   └── meeting_service.py
+└── schemas/
+    ├── task_schema.py
+    ├── meeting_schema.py
+    └── intent_schema.py
+</code></pre>
+<p><strong>Arquitectura 2 (apps/api/app/api/routes/):</strong></p>
+<pre><code>apps/api/app/
+├── api/
+│   └── routes/
+│       ├── tasks.py
+│       ├── meetings.py
+│       ├── intent.py
+│       ├── voice.py
+│       └── health.py
+├── services/
+│   ├── stt/
+│   ├── llm/
+│   └── tts/
+└── schemas/
+    ├── tasks.py
+    ├── voice.py
+    └── meetings.py
+</code></pre>
+<h4 id="comparacion-taskspy">Comparación: tasks.py</h4>
+<p><strong>Estilo Legacy (apps/api/routers/tasks.py):</strong></p>
+<pre><code class="language-python">@router.get(&quot;/&quot;, response_model=List[Task])
+def list_tasks():
+    return task_service.get_tasks()
+
+@router.post(&quot;/&quot;, response_model=Task, status_code=status.HTTP_201_CREATED)
+def create_task(task: TaskCreate):
+    return task_service.add_task(task)
+</code></pre>
+<p><strong>Estilo Moderno (apps/api/app/api/routes/tasks.py):</strong></p>
+<pre><code class="language-python">@router.get(&quot;/&quot;, response_model=list[Task])
+async def list_tasks() -&gt; list[Task]:
+    return list(_tasks.values())
+
+@router.post(&quot;/&quot;, response_model=Task)
+async def create_task(payload: TaskCreate) -&gt; Task:
+    task = Task(id=str(uuid4()), title=payload.title, due_at=payload.due_at)
+    _tasks[task.id] = task
+    return task
+</code></pre>
+<h4 id="impacto-negativo">Impacto Negativo</h4>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Impacto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Discoverabilidad</strong></td>
+<td>Un desarrollador debe buscar en dos lugares para entender "cómo se hacen tasks"</td>
+</tr>
+<tr>
+<td><strong>Consistencia</strong></td>
+<td>Diferentes patrones de error handling, validación e ID generation</td>
+</tr>
+<tr>
+<td><strong>Mantenimiento</strong></td>
+<td>Fix en <code>apps/api/routers/tasks.py</code> no se refleja en <code>app/api/routes/tasks.py</code></td>
+</tr>
+<tr>
+<td><strong>Carga Cognitiva</strong></td>
+<td>Necesidad de entender DOS filosofías: "¿por qué existen dos versiones?"</td>
+</tr>
+</tbody>
+</table>
+<h4 id="causa-probable">Causa Probable</h4>
+<p>Esto sugiere una <strong>migración incompleta</strong> de arquitectura legacy hacia un diseño moderno, sin deprecación clara del código antiguo.</p>
+<h4 id="evaluacion-tecnica">Evaluación Técnica</h4>
+<p>Este patrón es un ejemplo directo de <strong>shallow module proliferation</strong>: ambas implementaciones exponen la complejidad de routing sin un propósito claro de por qué coexisten.</p>
+<hr />
+<h3 id="22-fragmentacion-de-schemas-shallow-module-problem">2.2 Fragmentación de Schemas — Shallow Module Problem</h3>
+<h4 id="caracterizacion-shallow-modules">Caracterización: <strong>SHALLOW MODULES</strong></h4>
+<p>Existen múltiples archivos de schemas muy pequeños:</p>
+<pre><code>apps/api/schemas/
+├── task_schema.py       (34 líneas)
+├── meeting_schema.py
+├── intent_schema.py     (17 líneas)
+
+apps/api/app/schemas/
+├── tasks.py             (14 líneas)
+├── voice.py             (22 líneas)
+├── meetings.py
+</code></pre>
+<h4 id="analisis-task_schemapy-vs-taskspy">Análisis: task_schema.py vs tasks.py</h4>
+<p><strong>Versión Legacy (34 líneas, full-featured):</strong></p>
+<pre><code class="language-python">class TaskStatus(str, Enum):
+    PENDING = &quot;pending&quot;
+    IN_PROGRESS = &quot;in_progress&quot;
+    DONE = &quot;done&quot;
+
+class TaskBase(BaseModel):
+    title: str = Field(..., min_length=1, max_length=120)
+    description: Optional[str] = Field(None, max_length=500)
+    due_date: Optional[datetime] = Field(None)
+    status: TaskStatus = TaskStatus.PENDING
+
+    @validator(&quot;due_date&quot;, pre=True, always=True)
+    def parse_due_date(cls, value):
+        # ... validation logic
+</code></pre>
+<p><strong>Versión Moderna (14 líneas, minimalista):</strong></p>
+<pre><code class="language-python">class TaskCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    due_at: datetime | None = None
+
+class Task(BaseModel):
+    id: str
+    title: str
+    due_at: datetime | None = None
+</code></pre>
+<h4 id="por-que-son-shallow">Por Qué Son Shallow</h4>
+<ol>
+<li><strong>Bajo Valor de Abstracción</strong>: 14 líneas de Pydantic son apenas una capa sobre tipos Python</li>
+<li><strong>Facilidad de Duplicación</strong>: Copiar/pegar los schemas es más simple que refactorizar</li>
+<li><strong>Discoverability Débil</strong>: "¿Dónde está la definición de Task?" → respuesta ambigua</li>
+<li><strong>Mantenimiento Fragmentado</strong>: Cambios en reglas de validación podrían olvidarse en una versión</li>
+</ol>
+<h4 id="carga-cognitiva">Carga Cognitiva</h4>
+<p>Un desarrollador pregunta: "¿Debo usar <code>TaskCreate</code> de <code>apps/api/schemas/task_schema.py</code> o de <code>apps/api/app/schemas/tasks.py</code>?"</p>
+<p>Sin documentación clara, esta decisión se convierte en un <strong>friction point</strong>.</p>
+<hr />
+<h3 id="23-information-leakage-exposicion-de-detalles-sqlite">2.3 Information Leakage: Exposición de Detalles SQLite</h3>
+<h4 id="caracterizacion-partial-information-leakage">Caracterización: <strong>PARTIAL INFORMATION LEAKAGE</strong></h4>
+<p>La dependencia en <code>SQLiteConversationStore</code> en <code>apps/api/app/db/memory.py</code>:</p>
+<pre><code class="language-python"># apps/api/app/db/memory.py
+from app.db.sqlite_store import ConversationStore, SQLiteConversationStore
+
+_store = SQLiteConversationStore()
+
+def get_conversation_store() -&gt; ConversationStore:
+    return _store
+</code></pre>
+<h4 id="analisis">Análisis</h4>
+<p><strong>Lo Bueno (information hiding correcto):</strong>
+- La función retorna <code>ConversationStore</code> (interfaz abstracta)
+- El código de rutas nunca ve <code>SQLiteConversationStore</code> directamente
+- Cambiar a PostgreSQL solo requiere crear <code>PostgresConversationStore</code></p>
+<p><strong>Lo Preocupante (leakage potencial):</strong>
+- El archivo <code>memory.py</code> importa explícitamente <code>SQLiteConversationStore</code>
+- Si la migración a otra BD requiere cambios en transacciones o schema, esos cambios se "filtran" hacia <code>memory.py</code> como actualizaciones obligatorias
+- El nombre del archivo <code>memory.py</code> es engañoso: sugiere in-memory, pero es realmente un wrapper de SQLite</p>
+<h4 id="riesgo-arquitectonico">Riesgo Arquitectónico</h4>
+<p>Si en futuro se decide migrar a PostgreSQL:</p>
+<pre><code class="language-python"># Futuro cambio requerido en memory.py:
+from app.db.postgres_store import ConversationStore, PostgresConversationStore
+
+_store = PostgresConversationStore()  # ← information leakage
+</code></pre>
+<p>Este archivo actuaría como punto de fricción en la migración. La solución ideal sería:</p>
+<pre><code class="language-python"># Better approach: factory basado en settings
+from app.core.settings import Settings
+
+def get_conversation_store() -&gt; ConversationStore:
+    settings = Settings()
+    if settings.db_provider == &quot;postgres&quot;:
+        return PostgresConversationStore()
+    return SQLiteConversationStore()
+</code></pre>
+<hr />
+<h2 id="3-analisis-de-errores-y-fronteras-de-modulos">3. Análisis de Errores y Fronteras de Módulos</h2>
+<h3 id="31-error-handling-informacion-sensible-en-respuestas">3.1 Error Handling — Información Sensible en Respuestas</h3>
+<h4 id="caracterizacion-selective-information-hiding">Caracterización: <strong>SELECTIVE INFORMATION HIDING</strong></h4>
+<p>En <code>apps/api/app/api/routes/tasks.py</code>:</p>
+<pre><code class="language-python">@router.delete(&quot;/{task_id}&quot;, status_code=status.HTTP_204_NO_CONTENT)
+async def delete_task(task_id: str):
+    if task_id not in _tasks:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=&quot;Task not found&quot;)
+    del _tasks[task_id]
+</code></pre>
+<p><strong>Buena Práctica</strong>: Expone <code>404</code> sin revelar estructura interna de <code>_tasks</code></p>
+<p><strong>Comparar con Legacy</strong> (<code>apps/api/routers/tasks.py</code>):</p>
+<pre><code class="language-python">@router.delete(&quot;/{task_id}&quot;, status_code=status.HTTP_204_NO_CONTENT)
+def delete_task(task_id: str):
+    task_service.delete_task(task_id)
+    return
+</code></pre>
+<p>Sin error handling explícito, las excepciones internas de <code>task_service</code> potencialmente se exponen.</p>
+<h3 id="32-timestamps-e-ids-en-responses">3.2 Timestamps e IDs en Responses</h3>
+<h4 id="analisis_1">Análisis</h4>
+<pre><code class="language-python"># apps/api/app/schemas/voice.py
+class HistoryEntry(BaseModel):
+    role: str
+    text: str
+    timestamp: str  # ← Expone ISO8601 timestamp del storage
+</code></pre>
+<p><strong>Evaluación</strong>: El timestamp es <strong>información legítima</strong> (no es leakage peligroso). Pero representa la estructura interna de SQLite (timestamp TEXT) filtrándose hacia el cliente.</p>
+<hr />
+<h2 id="4-patrones-positivos-abstracciones-sostenibles">4. Patrones Positivos — Abstracciones Sostenibles</h2>
+<h3 id="41-inyeccion-de-dependencias-en-rutas">4.1 Inyección de Dependencias en Rutas</h3>
+<pre><code class="language-python"># apps/api/app/api/routes/voice.py
+@router.post(&quot;/turn&quot;, response_model=VoiceTurnResponse)
+async def voice_turn(
+    payload: VoiceTurnRequest,
+    stt: STTService = Depends(get_stt_service),
+    llm: LLMService = Depends(get_llm_service),
+    tts: TTSService = Depends(get_tts_service),
+    store: ConversationStore = Depends(get_conversation_store),
+) -&gt; VoiceTurnResponse:
+</code></pre>
+<p><strong>Por Qué Es Deep</strong>:
+- Interfaz clara: recibe abstracciones, no implementaciones
+- Responsabilidad separada: deps.py maneja provider resolution
+- Testabilidad: inyectar mocks es trivial
+- Cambio amplificado invisible: reemplazar OpenAI por Anthropic requiere solo cambios en <code>deps.py</code></p>
+<hr />
+<h2 id="5-evaluacion-de-complejidad-cognitiva-por-modulo">5. Evaluación de Complejidad Cognitiva por Módulo</h2>
+<table>
+<thead>
+<tr>
+<th>Módulo</th>
+<th>Tipo</th>
+<th>Interfaz Lines</th>
+<th>Impl Lines</th>
+<th>Profundidad</th>
+<th>Riesgo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STTService (base)</td>
+<td>Abstract</td>
+<td>3</td>
+<td>-</td>
+<td><strong>DEEP</strong></td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>OpenAIWhisperSTTService</td>
+<td>Concrete</td>
+<td>16</td>
+<td>16</td>
+<td>DEEP</td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>ConversationStore (abstract)</td>
+<td>Abstract</td>
+<td>9</td>
+<td>-</td>
+<td><strong>DEEP</strong></td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>SQLiteConversationStore</td>
+<td>Concrete</td>
+<td>154</td>
+<td>154</td>
+<td>DEEP</td>
+<td>Bajo (si bien abstraída)</td>
+</tr>
+<tr>
+<td>tasks.py (modern)</td>
+<td>Schema</td>
+<td>14</td>
+<td>14</td>
+<td><strong>SHALLOW</strong></td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>task_schema.py (legacy)</td>
+<td>Schema</td>
+<td>34</td>
+<td>34</td>
+<td><strong>SHALLOW</strong></td>
+<td>Medio</td>
+</tr>
+<tr>
+<td>deps.py</td>
+<td>Factory</td>
+<td>41</td>
+<td>41</td>
+<td>SEMI-DEEP</td>
+<td>Bajo</td>
+</tr>
+<tr>
+<td>memory.py (misnomer)</td>
+<td>Wrapper</td>
+<td>8</td>
+<td>8</td>
+<td>SHALLOW</td>
+<td>Bajo-Medio</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-recomendaciones-arquitectonicas">6. Recomendaciones Arquitectónicas</h2>
+<h3 id="61-consolidar-arquitecturas-deprecar-routers-a-favor-de-appapiroutes">6.1 Consolidar Arquitecturas: Deprecar routers/ a favor de app/api/routes/</h3>
+<p><strong>Acción</strong>: Crear Plan de Migración</p>
+<ol>
+<li><strong>Mantener Feature Parity</strong>: Asegurar que <code>app/api/routes/</code> tenga todas las features de <code>routers/</code></li>
+<li><strong>Deprecation Period</strong>: Mantener <code>routers/</code> durante 1-2 sprints con warnings en logs</li>
+<li><strong>Single Source of Truth</strong>: Una vez migrado, eliminar <code>routers/</code> completamente</li>
+</ol>
+<p><strong>Beneficio</strong>: Eliminar el "cognitive overhead" de dos arquitecturas paralelas.</p>
+<h3 id="62-consolidar-schemas-unificar-validaciones">6.2 Consolidar Schemas: Unificar Validaciones</h3>
+<p><strong>Acción</strong>: Centralizar schemas en <code>apps/api/app/schemas/</code></p>
+<pre><code class="language-python"># Propuesta: apps/api/app/schemas/tasks.py (mejorado)
+class TaskCreate(BaseModel):
+    title: str = Field(min_length=1, max_length=200)
+    description: str | None = Field(None, max_length=500)
+    due_at: datetime | None = None
+    status: TaskStatus = TaskStatus.PENDING  # ← reutilizar del legacy
+
+class Task(TaskCreate):
+    id: str
+    created_at: datetime
+    updated_at: datetime
+</code></pre>
+<p><strong>Beneficio</strong>: Single source of truth, no duplicación.</p>
+<h3 id="63-aplicar-factory-pattern-a-storage">6.3 Aplicar Factory Pattern a Storage</h3>
+<p><strong>Acción</strong>: Mejorar <code>apps/api/app/db/memory.py</code> → <code>get_store.py</code> o integrar en <code>deps.py</code></p>
+<pre><code class="language-python"># apps/api/app/core/deps.py (propuesta)
+def get_conversation_store() -&gt; ConversationStore:
+    settings = Settings()
+    if settings.db_provider == &quot;postgres&quot;:
+        return PostgresConversationStore(settings.db_url)
+    elif settings.db_provider == &quot;memory&quot;:
+        return MemoryConversationStore()
+    return SQLiteConversationStore(settings.sqlite_path)
+</code></pre>
+<p><strong>Beneficio</strong>: Consistencia con patrón de providers (STT/LLM/TTS).</p>
+<h3 id="64-estandarizar-asyncawait">6.4 Estandarizar Async/Await</h3>
+<p><strong>Observación</strong>: 
+- <code>apps/api/app/api/routes/tasks.py</code> usa <code>async def</code> correctamente
+- <code>apps/api/routers/tasks.py</code> usa <code>def</code> sincrónico</p>
+<p><strong>Acción</strong>: Todas las rutas deben ser <code>async</code>. FastAPI y el stack moderno asume asyncio.</p>
+<hr />
+<h2 id="7-impacto-de-coautoria-con-ia">7. Impacto de Coautoría con IA</h2>
+<p>El proyecto NETVOCAL presenta características que sugieren coautoría con IA:</p>
+<ol>
+<li><strong>Fragmentación Arquitectónica</strong>: Dos versiones de cada módulo (legacy y moderna) podrían indicar regeneración/refactor con prompts separados</li>
+<li><strong>Inconsistencia de Nombrado</strong>: <code>memory.py</code> no representa lo que hace (es SQLite wrapper, no memory store)</li>
+<li><strong>Schemas Duplicados</strong>: Copia/pega sin consolidación sugiere falta de refactor unificado</li>
+<li><strong>Good News</strong>: Las abstracciones core (STTService, LLMService, ConversationStore) son de alta calidad</li>
+</ol>
+<p><strong>Aprendizaje</strong>: La IA generó bien interfaces profundas, pero no consolidó bien arquitectura duplicada. Esto refuerza la importancia de <strong>revisión arquitectónica post-generación</strong>.</p>
+<hr />
+<h2 id="8-conclusiones">8. Conclusiones</h2>
+<h3 id="modulos-deep-sostenibles">Módulos Deep (Sostenibles)</h3>
+<p>✅ <strong>STTService, LLMService, TTSService</strong> — Abstracciones bien diseñadas que ocultan complejidad de APIs externas
+✅ <strong>ConversationStore + SQLiteConversationStore</strong> — Persistencia abstracta con interfaz limpia<br />
+✅ <strong>deps.py Factory</strong> — Centralización de provider resolution</p>
+<h3 id="modulos-shallow-requieren-atencion">Módulos Shallow (Requieren Atención)</h3>
+<p>⚠️ <strong>routers/ vs app/api/routes/</strong> — Duplicación arquitectónica sin propósito claro
+⚠️ <strong>Fragmentación de schemas</strong> — Múltiples definiciones del mismo concepto<br />
+⚠️ <strong>memory.py</strong> — Wrapper débil, debería ser parte de factory centralizado</p>
+<h3 id="information-leakage-identificado">Information Leakage Identificado</h3>
+<p>🔴 <strong>Partial</strong>: <code>memory.py</code> acoplado a <code>SQLiteConversationStore</code><br />
+🟡 <strong>Controlled</strong>: Errores HTTP exponen estructura de decisiones, pero no datos sensibles<br />
+🟢 <strong>Good</strong>: Rutas nunca ven detalles de providers concretos</p>
+<h3 id="recomendaciones-prioritarias">Recomendaciones Prioritarias</h3>
+<ol>
+<li><strong>Consolidar Arquitecturas</strong>: Un único estilo de routing (<code>app/api/routes/</code>)</li>
+<li><strong>Centralizar Schemas</strong>: Eliminar duplicación en <code>apps/api/schemas/</code> / <code>app/schemas/</code></li>
+<li><strong>Aplicar Factory Unificado</strong>: <code>deps.py</code> maneja storage, STT, LLM, TTS, logging</li>
+<li><strong>Documentar Decisiones</strong>: ADR para explicar por qué ciertos módulos son deep vs shallow</li>
+</ol>
+<h3 id="reflexion-final">Reflexión Final</h3>
+<p>NETVOCAL demuestra que <strong>profundidad modular es alcanzable en proyectos co-creados con IA</strong>, pero requiere disciplina post-generación. Las interfaces bien diseñadas (STTService, ConversationStore) reducen significativamente el costo cognitivo de cambios futuros. La duplicación arquitectónica es el mayor riesgo actual, y consolidarla sería el mayor impacto en mantenibilidad.</p>
+<p><strong>Complejidad cognitiva</strong> del sistema actual: <strong>Moderada, con oportunidades claras de mejora</strong>.</p>
 
 
 

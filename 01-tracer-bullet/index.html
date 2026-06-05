@@ -412,7 +412,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="El enfoque de riesgo primero">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-identificacion-del-mayor-riesgo-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Identificación del mayor riesgo técnico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-la-bala-trazadora-en-accion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. La Bala Trazadora en acción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. La Bala Trazadora en acción">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -459,8 +481,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-mocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de Mocks
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Conclusión
+      
+    </span>
+  </a>
   
 </li>
       
@@ -561,7 +605,29 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="El enfoque de riesgo primero">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-identificacion-del-mayor-riesgo-tecnico" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Identificación del mayor riesgo técnico
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-la-bala-trazadora-en-accion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. La Bala Trazadora en acción
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. La Bala Trazadora en acción">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -608,8 +674,30 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#ejemplo-de-mocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ejemplo de Mocks
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Conclusión
+      
+    </span>
+  </a>
   
 </li>
       
@@ -637,7 +725,51 @@
 <h2 id="el-enfoque-de-riesgo-primero">El enfoque de riesgo primero</h2>
 <p>Siguiendo el concepto de <em>Tracer Bullet</em> de John Ousterhout, priorizamos construir el pipeline de voz completo desde el inicio — el componente de mayor riesgo técnico — antes de profundizar en cualquier capa horizontal.</p>
 <pre><code class="language-python"># apps/api/app/api/routes/voice.py
-@router.post(&quot;/turn&quot;, response_model=VoiceTurnResponse)
+# 01. La Bala Trazadora y el Enrutamiento de Skills
+
+## 1. Introducción
+
+### ¿Qué es una “Tracer Bullet”?
+La técnica de “Tracer Bullet” (bala trazadora) en ingeniería de software consiste en construir rápidamente una implementación funcional mínima de un flujo crítico para validar la viabilidad arquitectónica antes de avanzar hacia un sistema completo. Inspirada por la metáfora balística—donde la bala trazadora permite ver el trayecto real y ajustar el disparo—, esta estrategia ayuda a identificar problemas fundamentales en integración, dependencias y acoplamientos tempranos en el ciclo de vida del proyecto.
+
+### Contexto de Aplicación: Ousterhout y NETVOCAL
+En su obra *A Philosophy of Software Design*, John Ousterhout enfatiza la importancia de evitar el diseño excesivamente especulativo, que puede producir complejidad accidental, promoviendo ciclos de retroalimentación cortos y validaciones estructurales tempranas. El equipo NETVOCAL adoptó esta filosofía, enfocado en implementar primero el pipeline de voz end-to-end, antes de invertir en la interfaz avanzada o funcionalidades periféricas. La bala trazadora fue la evidencia experimental de la factibilidad arquitectónica central.
+
+## 2. El árbol de diseño y las assumptions iniciales
+
+La estrategia de NETVOCAL inició con el despiece cuidadoso del Product Requirements Document (PRD) en vertical slices: bloques funcionales autónomos que implementan de punta a punta un flujo de valor tangible para el usuario. Este enfoque contrastó con la construcción por capas (API, lógica, UI por separado), favoreciendo la validación continua y riesgos controlados.
+
+Herramientas como los scripts `once.sh` y `once_track.sh` de Ralph garantizaron esta disciplina. Por ejemplo, `ralph/once.sh`:
+
+```bash
+# Fragmento de once.sh
+1: # Ralph — Human-in-the-loop: una iteración de implementación autónoma
+...
+33: 1. Encuentra la SIGUIENTE tarea incompleta en PRD.md cuya prioridad sea
+34:    la más alta y cuyas dependencias estén satisfechas (mira el grafo de
+35:    dependencias en la sección 'Dependencias entre tareas').
+...
+56: - SOLO UNA TAREA A LA VEZ. No te adelantes ni hagas dos tareas.
+</code></pre>
+<p>Así, el equipo se obligaba a implementar ciclos verticales completos, privilegiando la integración temprana del pipeline de voz sobre la creación anticipada de componentes de UI.</p>
+<h2 id="3-identificacion-del-mayor-riesgo-tecnico">3. Identificación del mayor riesgo técnico</h2>
+<p>Desde el arranque, se identificó el pipeline completo de voz como el mayor foco de incertidumbre:</p>
+<pre><code>Micrófono → STT (Speech to Text) → LLM (Language Model) → TTS (Text to Speech) → Altavoz
+</code></pre>
+<p>Los principales riesgos incluían:
+- <strong>STT (Whisper API):</strong> riesgo en rendimiento, formatos de audio, calidad de transcripción y dependencias externas.
+- <strong>LLM (OpenAI):</strong> manejo de latencia, límites de contexto, credencialización.
+- <strong>TTS (OpenAI):</strong> variabilidad en tiempos de síntesis y retorno de audio.
+- <strong>Integración asíncrona:</strong> asegurar manejo de timeouts y errores en cada eslabón del pipeline.
+- <strong>Audio:</strong> normalización de archivos, integridad de los blobs y compatibilidad cross-browser/front.</p>
+<p>Estos factores confluían en el endpoint <code>/voice/turn</code>, base de cualquier experiencia usable para el usuario final.</p>
+<h2 id="4-la-bala-trazadora-en-accion">4. La Bala Trazadora en acción</h2>
+<p>Al revisar el backlog, las primeras issues priorizadas fueron:
+- <strong><a href="https://github.com/NickGV/netvocal/issues/7">#7</a>:</strong> Integrar <strong>STT</strong> real.
+- <strong><a href="https://github.com/NickGV/netvocal/issues/4">#4</a>:</strong> Integrar <strong>LLM</strong> real.
+- <strong><a href="https://github.com/NickGV/netvocal/issues/10">#10</a>:</strong> Integrar <strong>TTS</strong> real.</p>
+<p>Esto se materializó en la implementación del endpoint crítico, tal como se observa en <code>apps/api/app/api/routes/voice.py</code>:</p>
+<pre><code class="language-python">@router.post(&quot;/turn&quot;, response_model=VoiceTurnResponse)
 async def voice_turn(
     payload: VoiceTurnRequest,
     stt: STTService = Depends(get_stt_service),
@@ -669,8 +801,56 @@ async def voice_turn(
 <ul>
 <li>La bala trazadora destrabó incertidumbre técnica rápidamente</li>
 <li>Los mocks permitieron desarrollo frontend sin backend completo</li>
-<li>El enfoque vertical expuso riesgos de integración temprano</li>
+<li>El enfoque vertical expuso riesgos de integración temprano
+    session_id = payload.session_id or store.create_session()
+    history = store.get_history(session_id)
+    assistant_text = await llm.generate_reply(payload.utterance, conversation_history=history)
+    store.add_turn(session_id, payload.utterance, assistant_text)
+    return VoiceTurnResponse(assistant_text=assistant_text, session_id=session_id)</li>
 </ul>
+<pre><code>**Explicación técnica:**
+- Uso explícito de inyección de dependencias para facilitar el switching de providers.
+- Abstracción conversacional desacoplada: `ConversationStore` permite swap entre memoria y persistencia.
+- Flujo asíncrono de extremo a extremo: cada request se orquesta sin bloqueo y persiste historial.
+- El mismo patrón fue replicado para `/turn/audio`, soportando entrada de audio real.
+
+## 5. Feedback temprano y corrección de rumbo
+
+Una clave para el éxito fue la estructura orientada a mocks y providers intercambiables, desacoplados vía settings y `deps.py`:
+
+```python
+# apps/api/app/core/deps.py
+from app.services.stt.mock import MockSTTService
+from app.services.stt.openai import OpenAIWhisperSTTService
+...
+def get_stt_service() -&gt; STTService:
+    settings = Settings()
+    if settings.stt_provider == &quot;openai&quot;:
+        return OpenAIWhisperSTTService(...)  # integración real
+    return MockSTTService()  # fallback para desarrollo
+</code></pre>
+<p>Esto permitió:
+- Desarrollar y testear frontend sobre endpoints funcionales aunque el backend estuviera aun en mock.
+- Reactivar el pipeline completo apenas un solo eslabón (STT, LLM, TTS) estuviera disponible real por settings.
+- Reducir tiempos de bloqueo: desarrollo verdaderamente paralelo.
+- Minimizar deuda técnica al migrar de memory store a SQLite sin reescribir la UI ni la API (<code>ConversationStore</code> como interfaz estable).</p>
+<h3 id="ejemplo-de-mocks">Ejemplo de Mocks</h3>
+<pre><code class="language-python"># apps/api/app/services/llm/mock.py
+class MockLLMService(LLMService):
+    async def generate_reply(self, user_text: str, conversation_history: list[dict] | None = None) -&gt; str:
+        _ = conversation_history
+        return f&quot;(mock) You said: {user_text}&quot;.strip()
+</code></pre>
+<h2 id="6-conclusion">6. Conclusión</h2>
+<p>La implementación disciplinada de la bala trazadora en NETVOCAL validó, de manera empírica y rápida, la viabilidad de la arquitectura central. Los beneficios fueron claros:</p>
+<ul>
+<li><strong>Reducción de riesgo:</strong> Posibilitó detectar problemas de integración, performance y desacople antes de invertir recursos en la UI o features secundarias.</li>
+<li><strong>Desarrollo paralelo real:</strong> Los mocks y el switching permitieron progresar sin cuellos de botella inter-equipo.</li>
+<li><strong>Simplicidad y claridad</strong> (Ousterhout): El foco en el “happy path” primero redujo la tentación de overengineering o diseñar para todos los casos posibles desde el inicio.</li>
+<li><strong>Escalabilidad y testabilidad:</strong> La arquitectura modular y desacoplada facilita ya el crecimiento y mantenimiento futuro.</li>
+</ul>
+<p><strong>Lección para proyectos futuros:</strong>
+Comenzar validando el flujo crítico, con tracer bullets verticales, es la estrategia de mayor retorno/riesgo. Permite iterar, obtener feedback extremo a extremo y sentar bases robustas para el crecimiento del producto.</p>
 
 
 
