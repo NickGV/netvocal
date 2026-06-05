@@ -1,8 +1,10 @@
-# Voice Assistant (Monorepo)
+# NETVOCAL — DevVoice Assistant
 
-Production-ready monorepo scaffold for a real-time developer voice assistant.
+> **Software Journey:** [https://nickgv.github.io/netvocal/](https://nickgv.github.io/netvocal/)
 
 Pipeline: **Microphone → Speech-to-Text → LLM → Text-to-Speech → Speaker**.
+
+Asistente de voz con IA que transforma la interacción humano-computadora mediante procesamiento de lenguaje natural y síntesis de voz.
 
 ---
 
@@ -95,23 +97,21 @@ This starts both services (api on :8000, web on :3000) without setting up Python
 
 ## Running tests
 
+### Backend (pytest)
+
+```bash
+cd apps/api && .venv/bin/pytest -v
+```
+
+77 tests covering: health, voice pipeline, tasks CRUD, meetings CRUD, intent parsing, error handling, input validation, boundary conditions, response consistency, integration scenarios.
+
 ### Frontend (vitest)
 
 ```bash
 pnpm -C apps/web test
 ```
 
-- API runs at [http://localhost:8000](http://localhost:8000)
-
----
-
-## Health check
-
-```bash
-cd apps/api && source .venv/bin/activate && pytest -v
-```
-
-21 tests covering: health, voice turns (text + audio), tasks CRUD, meetings CRUD.
+70 tests covering: voice recording, conversation history, tasks & meetings forms, QuickCommand, API client, hooks.
 
 ## Monorepo structure
 
@@ -120,62 +120,40 @@ apps/
   web/         # Next.js frontend (App Router)
   api/         # FastAPI backend (Python 3.11+)
 packages/      # Shared code (reserved)
-docs/
+docs/          # Software Journey site (MkDocs + Material)
 ```
 
 ---
 
-## Productividad Backend — Track B
+## Software Journey
 
-Este módulo implementa el subsystema de Productividad sobre FastAPI siguiendo práctica limpia, modular y profesional.
+Visita [https://nickgv.github.io/netvocal/](https://nickgv.github.io/netvocal/) para:
 
-### Endpoints principales
-
-#### Tareas
-- `GET /tasks` — Lista todas las tareas.
-- `POST /tasks` — Crea una nueva tarea.
-- `DELETE /tasks/{id}` — Elimina una tarea por su ID.
-
-#### Reuniones
-- `GET /meetings` — Lista todas las reuniones.
-- `POST /meetings` — Agenda una reunión.
-- `DELETE /meetings/{id}` — Elimina una reunión.
-
-#### Intent Parser (NLP)
-- `POST /intent/parse` — Analiza texto natural e interpreta intención, ejecutando la acción relevante (crear tarea, agendar reunión o consulta de estado).
-
-### Detalles técnicos
-
-- Persistencia en memoria
-- Manejo de IDs únicos (UUID)
-- Validaciones robustas en schemas
-- Separación router/service/store limpia
-- Cobertura de pruebas con `pytest`
-- Modular y fácil de extender
+1. **Bala Trazadora** — Cómo priorizamos el pipeline de voz como componente de mayor riesgo
+2. **Deep vs Shallow Modules** — Análisis arquitectónico usando principios de John Ousterhout
+3. **Veredicto Retrospectivo** — Evaluación del impacto de las decisiones de diseño
 
 ---
 
-## Progreso y pruebas
+## API Endpoints
 
-- Todos los endpoints Productividad tienen pruebas automatizadas.
-- Corre todas las pruebas con:
+### Voz
+- `POST /voice/turn` — Pipeline completo: STT → LLM → TTS
+- `POST /voice/turn/audio` — Mismo pipeline con entrada/salida de audio
+- `GET /voice/history/{session_id}` — Historial de conversación
 
-    ```bash
-    python -m pytest apps/api/tests/ -v
-    ```
+### Tareas
+- `GET /tasks` — Lista todas las tareas
+- `POST /tasks` — Crea una nueva tarea
+- `DELETE /tasks/{id}` — Elimina una tarea
 
-- El progreso del backend productivo está documentado en:  
-  `ralph/progress_track.txt`
+### Reuniones
+- `GET /meetings` — Lista todas las reuniones
+- `POST /meetings` — Agenda una reunión
+- `DELETE /meetings/{id}` — Elimina una reunión
 
----
+### Intent Parser
+- `POST /intent/parse` — Interpreta lenguaje natural y ejecuta la acción relevante
 
-## Autores y reglas de contribución
-
-- Implementación conforme a la rama: `develop-elberB`.
-- Solo código backend de Track B (Productividad).
-- Commits convencionales y manejo estricto de reglas.
-- Listo para integración y extensión.
-
----
-
-> “Track B terminado y validado. Listo para integración o extensión.”
+### Health
+- `GET /health` — Health check del sistema
